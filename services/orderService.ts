@@ -6,6 +6,8 @@ export const OrderService = {
      CREATE ORDER
   =============================== */
   async createOrder(userId: string, totalAmount: number) {
+    const paymentCode = `PN${Date.now()}`;
+
     const { data, error } = await supabase
       .from('orders')
       .insert({
@@ -13,9 +15,14 @@ export const OrderService = {
         total_amount: totalAmount,
         final_amount: totalAmount,
         status: 'pending',
+        payment_code: paymentCode,
       })
       .select()
       .single();
+
+    if (data) {
+      console.log("Payment code:", paymentCode);
+    }
 
     return { data, error };
   },

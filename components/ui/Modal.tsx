@@ -7,9 +7,10 @@ interface ModalProps {
   isOpen: boolean;
   onClose?: () => void;
   children: React.ReactNode;
+  maxWidth?: string;
 }
 
-export const Modal: React.FC<ModalProps> = ({ isOpen, onClose, children }) => {
+export const Modal: React.FC<ModalProps> = ({ isOpen, onClose, children, maxWidth }) => {
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
@@ -35,7 +36,11 @@ export const Modal: React.FC<ModalProps> = ({ isOpen, onClose, children }) => {
       ></div>
       
       {/* Modal Content */}
-      <div className="relative bg-white rounded-3xl shadow-2xl max-w-md w-full p-8 animate-in zoom-in-95 slide-in-from-bottom-5 duration-300">
+<div
+  className={`relative bg-white rounded-3xl shadow-2xl w-full p-10 animate-in zoom-in-95 slide-in-from-bottom-5 duration-300 ${
+    maxWidth || 'max-w-md'
+  }`}
+>
         {onClose && (
           <button 
             onClick={onClose} 

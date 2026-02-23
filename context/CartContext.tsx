@@ -7,6 +7,7 @@ import React, {
 import { useAuth } from './AuthContext';
 import { CartService } from '../services/cartService';
 import { OrderService } from '../services/orderService';
+import { supabase } from '../services/supabase';
 
 /* =======================
    Types
@@ -33,7 +34,7 @@ interface CartContextType {
   clearCart: () => void;
   cartCount: number;
   cartTotal: number;
-  placeOrder: (coupon?: any) => Promise<void>;
+  placeOrder: (coupon?: any) => Promise<any>;
 }
 
 const CartContext = createContext<CartContextType | undefined>(undefined);
@@ -235,7 +236,18 @@ export const CartProvider: React.FC<{ children: React.ReactNode }> = ({
 
       if (applyRes.error) throw applyRes.error;
     }
-  };
+    // 4) Fetch updated order (to get final_amount + payment_code)
+    const { data: updatedOrder, error: fetchError } =
+      await supabase
+        .from('orders')
+        .select('*')
+        .eq('id', orderId)
+        .single();
+
+    if (fetchError) throw fetchError;
+
+    return updatedOrder;
+      };
 
   /* =======================
      UI HELPERS

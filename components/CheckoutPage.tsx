@@ -37,6 +37,9 @@ const CheckoutPage: React.FC = () => {
   const [paymentState, setPaymentState] = useState<PaymentState>({
     status: 'idle',
   });
+  const [qrUrl, setQrUrl] = useState<string | null>(null);
+  const [showQr, setShowQr] = useState(false);
+  const [paymentCode, setPaymentCode] = useState<string | null>(null);
 
   const [formData, setFormData] = useState({
     name: '',
@@ -112,13 +115,17 @@ const handlePaymentProcess = async (
   setPaymentState({ status: 'pending' });
 
   try {
-    await placeOrder(appliedCoupon || undefined);
+    const result = await placeOrder(appliedCoupon || undefined);
 
-    const orderCode = `PN${Date.now()}`;
-    setPaymentState({
-      status: 'success',
-      transactionId: orderCode,
-    });
+    // result phải trả về order (nếu chưa thì báo mình)
+    const order = result;
+    setPaymentCode(order.payment_code);
+
+    const qr = `https://img.vietqr.io/image/MB-7109092004-compact2.png?amount=${order.final_amount}&addInfo=${order.payment_code}&accountName=LE%20THUY%20DIEM`;
+
+    setQrUrl(qr);
+    setShowQr(true);
+    setPaymentState({ status: 'idle' });
   } catch (err: any) {
     console.error('Payment Error:', err);
 
@@ -184,6 +191,67 @@ const handlePaymentProcess = async (
 
   return (
     <div className="pt-24 pb-20 min-h-screen bg-zinc-50 relative">
+    {/* QR MODAL */}
+    <Modal
+      isOpen={showQr}
+      onClose={() => setShowQr(false)}
+      maxWidth="max-w-5xl"
+    >
+      <div className="w-full max-w-4xl">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+
+          {/* LEFT – QR */}
+          <div className="flex flex-col items-center">
+            <h2 className="text-2xl font-bold mb-6">
+              Quét mã để thanh toán
+            </h2>
+
+            {qrUrl && (
+              <div className="bg-white p-4 rounded-xl shadow-inner">
+                <img
+                  src={qrUrl}
+                  alt="QR thanh toán"
+                  className="w-80 aspect-square object-contain drop-shadow-lg"
+                />
+              </div>
+            )}
+          </div>
+
+          {/* RIGHT – INFO */}
+          <div className="space-y-6">
+
+            <div>
+              <div className="text-sm text-zinc-500 mb-2">
+                Nội dung chuyển khoản
+              </div>
+
+              <div className="font-mono text-xl font-bold text-brand-600 bg-zinc-100 px-4 py-3 rounded-xl">
+                {paymentCode}
+              </div>
+            </div>
+
+            <div className="text-sm text-zinc-600 space-y-3">
+              <p>
+                Vui lòng chuyển khoản <span className="font-semibold">
+                đúng số tiền và nội dung
+                </span> để hệ thống tự động xác nhận.
+              </p>
+
+              <p className="text-xs text-zinc-500">
+                Thanh toán sẽ được xử lý tự động trong vòng 5–30 giây sau khi chuyển khoản thành công.
+              </p>
+
+              <p className="text-xs text-zinc-500">
+                Nếu gặp sự cố, vui lòng liên hệ hotline:
+                <span className="font-semibold"> 098 897 1620</span>
+              </p>
+            </div>
+
+          </div>
+
+        </div>
+      </div>
+    </Modal>
       {/* SUCCESS MODAL */}
       <Modal
         isOpen={paymentState.status === 'success'}
