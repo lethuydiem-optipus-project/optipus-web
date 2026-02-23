@@ -10,7 +10,7 @@ export const handler: Handler = async (event) => {
   try {
     const body = JSON.parse(event.body || "{}");
 
-    const { content, amount, transaction_id } = body;
+    const { content, transferAmount, referenceCode } = body;
 
     if (!content) {
       return {
@@ -19,10 +19,22 @@ export const handler: Handler = async (event) => {
       };
     }
 
+    // 🔥 Extract PN code
+    const match = content.match(/PN\d+/);
+    const paymentCode = match ? match[0] : null;
+
+    if (!paymentCode) {
+      return {
+        statusCode: 400,
+        body: "Payment code not found in content",
+      };
+    }
+
+    // 🔥 Find order
     const { data: order } = await supabase
       .from("orders")
       .select("*")
-      .eq("payment_code", content)
+      .eq("payment_code", paymentCode)
       .single();
 
     if (!order) {
@@ -32,11 +44,20 @@ export const handler: Handler = async (event) => {
       };
     }
 
+    // 🔥 Optional: check amount match
+    if (Number(order.final_amount) !== Number(transferAmount)) {
+      return {
+        statusCode: 400,
+        body: "Amount mismatch",
+      };
+    }
+
+    // 🔥 Update order
     await supabase
       .from("orders")
       .update({
         status: "paid",
-        sepay_txn_id: transaction_id,
+        sepay_txn_id: referenceCode,
       })
       .eq("id", order.id);
 
