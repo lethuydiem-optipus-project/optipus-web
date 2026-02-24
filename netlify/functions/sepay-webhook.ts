@@ -11,12 +11,15 @@ const supabase = createClient(
 );
 
 export const handler: Handler = async (event) => {
+  console.log("RAW BODY:", event.body);
   try {
     const body = JSON.parse(event.body || "{}");
+    console.log("PARSED BODY:", body);
 
     const { content, transferAmount, referenceCode } = body;
 
     if (!content) {
+      console.log("ERROR: Missing content");
       return {
         statusCode: 400,
         body: "Missing payment content",
@@ -28,6 +31,7 @@ export const handler: Handler = async (event) => {
     const paymentCode = match ? match[0] : null;
 
     if (!paymentCode) {
+      console.log("ERROR: Payment code not found");
       return {
         statusCode: 400,
         body: "Payment code not found",
@@ -50,6 +54,10 @@ export const handler: Handler = async (event) => {
 
     // 🔥 Check amount match
     if (Number(order.final_amount) !== Number(transferAmount)) {
+    console.log("ERROR: Amount mismatch",
+        order.final_amount,
+        transferAmount
+      );
       return {
         statusCode: 400,
         body: "Amount mismatch",
