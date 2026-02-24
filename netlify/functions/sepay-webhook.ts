@@ -138,11 +138,11 @@ console.log("ITEM ERROR:", itemsError);
     });
 
     // 🔥 Send email
-    /*await sendEmail({
+    await sendEmail({
       to: order.email,
       subject: `Tải template của bạn - ${order.order_code}`,
       html,
-    });*/
+    });
 
     return {
       statusCode: 200,
