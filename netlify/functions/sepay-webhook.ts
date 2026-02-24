@@ -9,7 +9,15 @@ const supabase = createClient(
   process.env.VITE_SUPABASE_URL!,
   process.env.SUPABASE_SERVICE_ROLE_KEY!
 );
+console.log(
+  "SERVICE ROLE LENGTH:",
+  process.env.SUPABASE_SERVICE_ROLE_KEY?.length
+);
 
+console.log(
+  "SERVICE ROLE START:",
+  process.env.SUPABASE_SERVICE_ROLE_KEY?.slice(0, 20)
+);
 export const handler: Handler = async (event) => {
   console.log("RAW BODY:", event.body);
   try {
@@ -80,9 +88,12 @@ export const handler: Handler = async (event) => {
         products (
           name,
           download_url
-        )
+        )s
       `)
       .eq("order_id", order.id);
+
+console.log("ORDER ITEMS:", orderItems);
+console.log("ITEM ERROR:", itemsError);
 
     if (itemsError || !orderItems || orderItems.length === 0) {
       return {
