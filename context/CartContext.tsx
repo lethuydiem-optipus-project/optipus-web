@@ -34,7 +34,7 @@ interface CartContextType {
   clearCart: () => void;
   cartCount: number;
   cartTotal: number;
-  placeOrder: (coupon?: any) => Promise<any>;
+  placeOrder: (coupon?: any, email?: string) => Promise<any>;
 }
 
 const CartContext = createContext<CartContextType | undefined>(undefined);
@@ -191,7 +191,8 @@ export const CartProvider: React.FC<{ children: React.ReactNode }> = ({
      PLACE ORDER
   ======================= */
 
-  const placeOrder = async (coupon?: any) => {
+  const placeOrder = async (coupon?: any, email?: string) => {
+    console.log("EMAIL RECEIVED IN placeOrder:", email);
     if (!user) throw new Error('Not authenticated');
 
     const selectedItems = items.filter(i => i.selected);
@@ -205,7 +206,7 @@ export const CartProvider: React.FC<{ children: React.ReactNode }> = ({
     );
 
     // 1) Create order
-    const orderRes = await OrderService.createOrder(user.id, totalAmount);
+    const orderRes = await OrderService.createOrder(user.id, totalAmount, email );
     if (orderRes.error) throw orderRes.error;
 
     const orderId = orderRes.data.id;

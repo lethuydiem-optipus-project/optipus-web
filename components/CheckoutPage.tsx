@@ -150,10 +150,19 @@ const handlePaymentProcess = async (
   e: React.FormEvent
 ) => {
   e.preventDefault();
+
+  // 🔥 VALIDATE EMAIL TRƯỚC
+  if (!formData.email) {
+    alert("Vui lòng nhập email nhận hàng");
+    return;
+  }
+
+
+
   setPaymentState({ status: 'pending' });
 
   try {
-    const result = await placeOrder(appliedCoupon || undefined);
+    const result = await placeOrder(appliedCoupon || undefined, formData.email);
 
     // result phải trả về order (nếu chưa thì báo mình)
     const order = result;

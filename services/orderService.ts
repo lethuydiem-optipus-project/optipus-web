@@ -5,7 +5,7 @@ export const OrderService = {
   /* ===============================
      CREATE ORDER
   =============================== */
-  async createOrder(userId: string, totalAmount: number) {
+  async createOrder(userId: string, totalAmount: number, email: string) {
     const paymentCode = `PN${Date.now()}`;
 
     const { data, error } = await supabase
@@ -16,6 +16,7 @@ export const OrderService = {
         final_amount: totalAmount,
         status: 'pending',
         payment_code: paymentCode,
+        email: email,
       })
       .select()
       .single();
