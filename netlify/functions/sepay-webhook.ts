@@ -92,15 +92,20 @@ export const handler: Handler = async (event) => {
     }
 
     // 🔥 Update order to paid
-    const { error: updateError } = await supabase
+    const { data: updateData, error: updateError } = await supabase
       .from("orders")
       .update({
         status: "paid",
         sepay_txn_id: referenceCode,
       })
-      .eq("id", order.id);
+      .eq("id", order.id)
+      .select();
+
+    console.log("UPDATE DATA:", updateData);
+    console.log("UPDATE ERROR:", updateError);
 
     if (updateError) {
+      console.log("ERROR: Failed to update order");
       return {
         statusCode: 500,
         body: "Failed to update order",
