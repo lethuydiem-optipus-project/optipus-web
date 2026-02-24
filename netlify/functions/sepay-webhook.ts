@@ -1,6 +1,10 @@
 import { Handler } from "@netlify/functions";
 import { createClient } from "@supabase/supabase-js";
 
+import { sendEmail } from "./services/emailService";
+import { emailLayout } from "./email-templates/layout";
+import { paymentSuccessContent } from "./email-templates/paymentSuccess";
+
 const supabase = createClient(
   process.env.VITE_SUPABASE_URL!,
   process.env.SUPABASE_SERVICE_ROLE_KEY!
@@ -19,32 +23,32 @@ export const handler: Handler = async (event) => {
       };
     }
 
-    // 🔥 Extract PN code
+    // 🔥 Extract payment code (PNxxxx)
     const match = content.match(/PN\d+/);
     const paymentCode = match ? match[0] : null;
 
     if (!paymentCode) {
       return {
         statusCode: 400,
-        body: "Payment code not found in content",
+        body: "Payment code not found",
       };
     }
 
     // 🔥 Find order
-    const { data: order } = await supabase
+    const { data: order, error: orderError } = await supabase
       .from("orders")
       .select("*")
       .eq("payment_code", paymentCode)
       .single();
 
-    if (!order) {
+    if (orderError || !order) {
       return {
         statusCode: 404,
         body: "Order not found",
       };
     }
 
-    // 🔥 Optional: check amount match
+    // 🔥 Check amount match
     if (Number(order.final_amount) !== Number(transferAmount)) {
       return {
         statusCode: 400,
@@ -52,8 +56,35 @@ export const handler: Handler = async (event) => {
       };
     }
 
-    // 🔥 Update order
-    await supabase
+    // 🔥 Prevent duplicate processing
+    if (order.status === "paid") {
+      return {
+        statusCode: 200,
+        body: "Already processed",
+      };
+    }
+
+    // 🔥 Fetch order items + join products
+    const { data: orderItems, error: itemsError } = await supabase
+      .from("order_items")
+      .select(`
+        *,
+        products (
+          name,
+          download_url
+        )
+      `)
+      .eq("order_id", order.id);
+
+    if (itemsError || !orderItems || orderItems.length === 0) {
+      return {
+        statusCode: 400,
+        body: "Order items not found",
+      };
+    }
+
+    // 🔥 Update order to paid
+    const { error: updateError } = await supabase
       .from("orders")
       .update({
         status: "paid",
@@ -61,11 +92,40 @@ export const handler: Handler = async (event) => {
       })
       .eq("id", order.id);
 
+    if (updateError) {
+      return {
+        statusCode: 500,
+        body: "Failed to update order",
+      };
+    }
+
+    // 🔥 Build email content
+    const emailContent = paymentSuccessContent({
+      orderCode: order.order_code,
+      products: orderItems.map((item: any) => ({
+        name: item.products.name,
+        downloadUrl: item.products.download_url,
+      })),
+    });
+
+    const html = emailLayout({
+      title: "Thanh toán thành công 🎉",
+      content: emailContent,
+    });
+
+    // 🔥 Send email
+    await sendEmail({
+      to: order.email,
+      subject: `Tải template của bạn - ${order.order_code}`,
+      html,
+    });
+
     return {
       statusCode: 200,
-      body: "Payment confirmed",
+      body: "Payment confirmed and email sent",
     };
   } catch (error) {
+    console.error("Webhook error:", error);
     return {
       statusCode: 500,
       body: "Server error",
