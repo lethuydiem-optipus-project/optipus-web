@@ -86,7 +86,7 @@ export const handler: Handler = async (event) => {
       .select(`
         *,
         products (
-          name,
+          title,
           download_url
         )s
       `)
@@ -127,7 +127,7 @@ console.log("ITEM ERROR:", itemsError);
     const emailContent = paymentSuccessContent({
       orderCode: order.order_code,
       products: orderItems.map((item: any) => ({
-        name: item.products.name,
+        name: item.products.title,
         downloadUrl: item.products.download_url,
       })),
     });
