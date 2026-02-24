@@ -4,6 +4,8 @@ import { Button } from './ui/Button';
 import { useCart } from '../context/CartContext';
 import { useAuth } from '../context/AuthContext';
 import { CouponService } from '../services/couponService';
+import { supabase } from "../services/supabase";
+import { useEffect } from "react";
 
 
 import {
@@ -75,6 +77,42 @@ const CheckoutPage: React.FC = () => {
   );
 
   const finalTotal = Math.max(0, subtotal - discount);
+  useEffect(() => {
+    if (!paymentCode || !showQr) return;
+
+    console.log("Start polling...");
+
+    const interval = setInterval(async () => {
+      console.log("Polling with code:", paymentCode);
+
+      const { data, error } = await supabase
+        .from("orders")
+        .select("status")
+        .eq("payment_code", paymentCode)
+        .single();
+
+      if (error) {
+        console.log("Polling error:", error);
+        return;
+      }
+
+      console.log("Order status:", data?.status);
+
+      if (data?.status === "paid") {
+        clearInterval(interval);
+        console.log("Payment detected!");
+
+        setShowQr(false);
+
+        setPaymentState({
+          status: "success",
+          transactionId: paymentCode,
+        });
+      }
+    }, 3000);
+
+    return () => clearInterval(interval);
+  }, [paymentCode, showQr]);
 
   // ✅ APPLY COUPON – dùng CouponService.applyCoupon
   const handleApplyCoupon = async () => {
@@ -120,6 +158,7 @@ const handlePaymentProcess = async (
     // result phải trả về order (nếu chưa thì báo mình)
     const order = result;
     setPaymentCode(order.payment_code);
+    console.log("PAYMENT CODE SET:", order.payment_code);
 
     const qr = `https://img.vietqr.io/image/MB-7109092004-compact2.png?amount=${order.final_amount}&addInfo=${order.payment_code}&accountName=LE%20THUY%20DIEM`;
 
