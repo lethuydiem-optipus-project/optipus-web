@@ -1,6 +1,4 @@
-import { Resend } from "resend";
-
-const resend = new Resend(process.env.RESEND_API_KEY!);
+import nodemailer from "nodemailer";
 
 export async function sendEmail({
   to,
@@ -11,10 +9,26 @@ export async function sendEmail({
   subject: string;
   html: string;
 }) {
-  await resend.emails.send({
-    from: process.env.EMAIL_FROM!,
-    to,
-    subject,
-    html,
+  const transporter = nodemailer.createTransport({
+    service: "gmail",
+    auth: {
+      user: process.env.GMAIL_USER,
+      pass: process.env.GMAIL_APP_PASSWORD,
+    },
   });
+
+  try {
+    const info = await transporter.sendMail({
+      from: `"Optipus" <${process.env.GMAIL_USER}>`,
+      to,
+      subject,
+      html,
+    });
+
+    console.log("EMAIL SENT:", info.messageId);
+    return info;
+  } catch (error) {
+    console.error("EMAIL ERROR:", error);
+    throw error;
+  }
 }

@@ -19,6 +19,7 @@ console.log(
   process.env.SUPABASE_SERVICE_ROLE_KEY?.slice(0, 20)
 );
 export const handler: Handler = async (event) => {
+  console.log("WEBHOOK VERSION 2 - SMTP ENABLED");
   console.log("RAW BODY:", event.body);
   try {
     const body = JSON.parse(event.body || "{}");
@@ -137,12 +138,14 @@ console.log("ITEM ERROR:", itemsError);
       content: emailContent,
     });
 
+    console.log("SENDING EMAIL TO:", order.email);
     // 🔥 Send email
     await sendEmail({
       to: order.email,
-      subject: `Tải template của bạn - ${order.order_code}`,
+      subject: `Tải template của bạn - ${order.payment_code}`,
       html,
     });
+    console.log("EMAIL SEND FUNCTION FINISHED");
 
     return {
       statusCode: 200,
