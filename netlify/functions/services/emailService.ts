@@ -1,6 +1,4 @@
 import nodemailer from "nodemailer";
-import { paymentSuccessTemplate } from "../email-templates/paymentSuccess"
-
 export async function sendEmail({
   to,
   subject,
@@ -13,14 +11,14 @@ export async function sendEmail({
   const transporter = nodemailer.createTransport({
     service: "gmail",
     auth: {
-      user: process.env.GMAIL_USER,
-      pass: process.env.GMAIL_APP_PASSWORD,
+      user: process.env.EMAIL_FROM,
+      pass: process.env.SMTP_PASS,
     },
   });
 
   try {
     const info = await transporter.sendMail({
-      from: `"Optipus" <${process.env.GMAIL_USER}>`,
+      from: `"Optipus" <${process.env.EMAIL_FROM}>`,
       to,
       subject,
       html,
