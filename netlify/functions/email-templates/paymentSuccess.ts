@@ -1,55 +1,38 @@
-export function paymentSuccessContent({
+export const paymentSuccessContent = ({
   orderCode,
   products,
 }: {
   orderCode: string;
   products: { name: string; downloadUrl: string }[];
-}) {
-  const productList = products
-    .map(
-      (p) => `
-        <div style="
-            border: 1px solid #e5e7eb;
-            border-radius: 8px;
-            padding: 16px;
-            margin-bottom: 16px;
-        ">
-          <strong style="display:block; margin-bottom:8px;">
-            ${p.name}
-          </strong>
+}) => {
+  return `
+    <p style="font-size:15px; color:#374151;">
+      Đơn hàng <strong>${orderCode}</strong> đã được thanh toán thành công.
+    </p>
 
-          <a href="${p.downloadUrl}" 
-             style="
-                display:inline-block;
-                padding:10px 16px;
-                background:#2563eb;
-                color:white;
-                text-decoration:none;
-                border-radius:6px;
-                font-size:14px;
-             ">
-             Tải xuống
+    <div style="margin-top:20px; background:#f5f3ff; border:1px solid #e9d5ff; border-radius:10px; padding:20px;">
+      
+      ${products
+        .map(
+          (product) => `
+        <div style="margin-bottom:20px;">
+          <div style="font-size:16px; font-weight:600; margin-bottom:10px;">
+            ${product.name}
+          </div>
+
+          <a href="${product.downloadUrl}"
+             style="background:#7c3aed; color:#ffffff; text-decoration:none; padding:12px 22px; border-radius:8px; font-size:14px; display:inline-block; font-weight:600;">
+            Tải xuống ngay
           </a>
         </div>
       `
-    )
-    .join("");
+        )
+        .join("")}
 
-  return `
-    <p>
-      Thanh toán của bạn đã được xác nhận thành công 🎉
-    </p>
-
-    <p>
-      <strong>Mã đơn:</strong> ${orderCode}
-    </p>
-
-    <div style="margin-top:20px;">
-      ${productList}
     </div>
 
-    <p style="margin-top:20px;">
-      Nếu bạn gặp vấn đề khi tải xuống, hãy phản hồi email này để được hỗ trợ.
+    <p style="margin-top:20px; font-size:13px; color:#6b7280;">
+      Nếu gặp sự cố khi tải, vui lòng phản hồi email này để được hỗ trợ.
     </p>
   `;
-}
+};

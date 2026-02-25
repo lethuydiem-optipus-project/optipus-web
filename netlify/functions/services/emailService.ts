@@ -1,4 +1,5 @@
 import nodemailer from "nodemailer";
+import { paymentSuccessTemplate } from "../email-templates/paymentSuccess"
 
 export async function sendEmail({
   to,

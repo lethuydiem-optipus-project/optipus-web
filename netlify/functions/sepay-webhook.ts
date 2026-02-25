@@ -109,12 +109,18 @@ console.log("ITEM ERROR:", itemsError);
       .update({
         status: "paid",
         sepay_txn_id: referenceCode,
+        paid_at: new Date().toISOString(),
       })
       .eq("id", order.id)
       .select();
-
-    console.log("UPDATE DATA:", updateData);
-    console.log("UPDATE ERROR:", updateError);
+    
+    if (order.email_sent) {
+      console.log("EMAIL ALREADY SENT - SKIP");
+      return {
+        statusCode: 200,
+        body: "Already processed",
+      };
+    }
 
     if (updateError) {
       console.log("ERROR: Failed to update order");
@@ -146,6 +152,14 @@ console.log("ITEM ERROR:", itemsError);
       html,
     });
     console.log("EMAIL SEND FUNCTION FINISHED");
+
+    // 🔥 update email_sent = true
+    await supabase
+      .from("orders")
+      .update({ email_sent: true })
+      .eq("id", order.id);
+
+    console.log("EMAIL_SENT FLAG UPDATED");    
 
     return {
       statusCode: 200,
