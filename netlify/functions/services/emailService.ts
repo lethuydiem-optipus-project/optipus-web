@@ -1,4 +1,5 @@
 import nodemailer from "nodemailer";
+
 export async function sendEmail({
   to,
   subject,
@@ -11,14 +12,14 @@ export async function sendEmail({
   const transporter = nodemailer.createTransport({
     service: "gmail",
     auth: {
-      user: process.env.EMAIL_FROM,
-      pass: process.env.SMTP_PASS,
+      user: process.env.GMAIL_USER,         // Đã sửa cho khớp Netlify
+      pass: process.env.GMAIL_APP_PASSWORD, // Đã sửa cho khớp Netlify
     },
   });
 
   try {
     const info = await transporter.sendMail({
-      from: `"Optipus" <${process.env.EMAIL_FROM}>`,
+      from: `"Optipus" <${process.env.GMAIL_USER}>`, // Dùng luôn GMAIL_USER làm người gửi
       to,
       subject,
       html,
