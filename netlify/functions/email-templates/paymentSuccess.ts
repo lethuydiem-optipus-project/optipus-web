@@ -1,6 +1,6 @@
 interface ProductItem {
   name: string;
-  downloadUrl?: string; // Có thể không dùng tới nếu bạn fix cứng link YouTube
+  downloadUrl: string; // Có thể không dùng tới nếu bạn fix cứng link YouTube
 }
 
 export const paymentSuccessContent = ({ orderCode, products }: { orderCode: string, products: ProductItem[] }) => {
@@ -11,7 +11,7 @@ export const paymentSuccessContent = ({ orderCode, products }: { orderCode: stri
         ${p.name}
       </td>
       <td style="padding: 16px; border-bottom: 1px solid #333333; font-size: 14px;">
-        <a href="https://www.youtube.com" style="color: #5fb0ff; text-decoration: underline;">Link download</a>
+        <a href="${p.downloadUrl}" style="color: #5fb0ff; text-decoration: underline;">Link download</a>
       </td>
     </tr>
   `).join('');

@@ -87,7 +87,7 @@ export const handler: Handler = async (event) => {
     if (!order.email_sent) {
       // Build email content với Optional Chaining an toàn
       const emailContent = paymentSuccessContent({
-        orderCode: order.order_code,
+        orderCode: order.payment_code,
         products: orderItems.map((item: any) => ({
           name: item.products?.title || "Sản phẩm không xác định",
           downloadUrl: item.products?.download_url || "#",
@@ -102,7 +102,7 @@ export const handler: Handler = async (event) => {
       console.log("SENDING EMAIL TO:", order.email);
       await sendEmail({
         to: order.email,
-        subject: `Tải template của bạn - ${order.payment_code}`,
+        subject: `OPTIPUS | Xác nhận thanh toán đơn hàng - ${order.payment_code} thành công`,
         html,
       });
 
