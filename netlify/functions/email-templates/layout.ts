@@ -1,53 +1,39 @@
-export const emailLayout = ({
-  title,
-  content,
-}: {
-  title: string;
-  content: string;
-}) => {
-  return `
-  <div style="margin:0; padding:0; background:#f3f0ff; font-family:Arial, Helvetica, sans-serif;">
-    
-    <table align="center" width="680" cellpadding="0" cellspacing="0"
-           style="margin:40px auto; background:#ffffff; border-radius:14px; overflow:hidden;">
+export const emailLayout = ({ title, content }: { title: string; content: string }) => `
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>${title}</title>
+  </head>
+  <body style="margin: 0; padding: 0; background-color: #121212; color: #ffffff; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Arial, sans-serif;">
+    <div style="max-width: 600px; margin: 0 auto; padding: 40px 20px;">
       
-      <!-- HEADER -->
-      <tr>
-        <td style="background:linear-gradient(135deg,#4c1d95,#7c3aed); padding:40px; text-align:center;">
-          
-          <img src="https://YOUR_PUBLIC_LOGO_URL"
-               width="60"
-               style="display:block; margin:0 auto 16px auto;" />
+      ${content}
 
-          <h1 style="color:#ffffff; margin:0; font-size:26px;">
-            OPTIPUS
-          </h1>
+      <div style="margin-top: 40px;">
+        <h3 style="font-size: 15px; margin-bottom: 12px; text-transform: uppercase; color: #ffffff;">Hỗ trợ khách hàng</h3>
+        <p style="color: #cccccc; font-size: 14px; line-height: 1.6; margin-bottom: 16px;">
+          Nếu gặp bất kỳ khó khăn nào trong quá trình cài đặt hoặc cần hỗ trợ thêm về dịch vụ, Quý khách đừng ngần ngại liên hệ với chúng tôi qua các kênh sau:
+        </p>
+        
+        <ul style="color: #cccccc; font-size: 14px; line-height: 1.8; padding-left: 20px;">
+          <li><strong>Hotline:</strong> [Số điện thoại của bạn]</li>
+          <li><strong>Facebook:</strong> <a href="[Link Fanpage]" style="color: #5fb0ff; text-decoration: none;">[Link Fanpage]</a></li>
+          <li><strong>TikTok:</strong> <a href="[Link kênh TikTok]" style="color: #5fb0ff; text-decoration: none;">[Link kênh TikTok]</a></li>
+          <li><strong>Instagram:</strong> <a href="[Link Instagram]" style="color: #5fb0ff; text-decoration: none;">[Link Instagram]</a></li>
+        </ul>
+        
+        <p style="color: #cccccc; font-size: 14px; line-height: 1.6; margin-top: 24px;">
+          Một lần nữa, cảm ơn Quý khách đã đồng hành cùng OPTIPUS. Chúc Quý khách có những trải nghiệm tuyệt vời và quản lý tài chính hiệu quả với sản phẩm của chúng tôi!
+        </p>
+        
+        <p style="color: #ffffff; font-size: 14px; line-height: 1.6; margin-top: 30px;">
+          Trân trọng,<br><br>
+          <strong>Đội ngũ OPTIPUS</strong>
+        </p>
+      </div>
 
-          <p style="color:#e9d5ff; margin-top:8px; font-size:14px;">
-            Multitask like an octopus.
-          </p>
-        </td>
-      </tr>
-
-      <!-- BODY -->
-      <tr>
-        <td style="padding:40px 50px;">
-          <h2 style="margin-top:0; font-size:22px; color:#4c1d95;">
-            ${title}
-          </h2>
-
-          ${content}
-        </td>
-      </tr>
-
-      <!-- FOOTER -->
-      <tr>
-        <td style="background:#faf5ff; padding:30px; text-align:center; font-size:12px; color:#9ca3af;">
-          © ${new Date().getFullYear()} Optipus
-        </td>
-      </tr>
-
-    </table>
-  </div>
-  `;
-};
+    </div>
+  </body>
+</html>
+`;

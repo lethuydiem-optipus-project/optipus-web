@@ -9,45 +9,27 @@ const supabase = createClient(
   process.env.VITE_SUPABASE_URL!,
   process.env.SUPABASE_SERVICE_ROLE_KEY!
 );
-console.log(
-  "SERVICE ROLE LENGTH:",
-  process.env.SUPABASE_SERVICE_ROLE_KEY?.length
-);
 
-console.log(
-  "SERVICE ROLE START:",
-  process.env.SUPABASE_SERVICE_ROLE_KEY?.slice(0, 20)
-);
 export const handler: Handler = async (event) => {
-  console.log("WEBHOOK VERSION 2 - SMTP ENABLED");
-  console.log("RAW BODY:", event.body);
+  console.log("WEBHOOK PROCESS STARTED");
+
   try {
     const body = JSON.parse(event.body || "{}");
-    console.log("PARSED BODY:", body);
-
     const { content, transferAmount, referenceCode } = body;
 
     if (!content) {
-      console.log("ERROR: Missing content");
-      return {
-        statusCode: 400,
-        body: "Missing payment content",
-      };
+      return { statusCode: 400, body: "Missing payment content" };
     }
 
-    // 🔥 Extract payment code (PNxxxx)
+    // 🔥 1. Extract payment code (PNxxxx)
     const match = content.match(/PN\d+/);
     const paymentCode = match ? match[0] : null;
 
     if (!paymentCode) {
-      console.log("ERROR: Payment code not found");
-      return {
-        statusCode: 400,
-        body: "Payment code not found",
-      };
+      return { statusCode: 400, body: "Payment code not found" };
     }
 
-    // 🔥 Find order
+    // 🔥 2. Find order
     const { data: order, error: orderError } = await supabase
       .from("orders")
       .select("*")
@@ -55,33 +37,21 @@ export const handler: Handler = async (event) => {
       .single();
 
     if (orderError || !order) {
-      return {
-        statusCode: 404,
-        body: "Order not found",
-      };
+      return { statusCode: 404, body: "Order not found" };
     }
 
-    // 🔥 Check amount match
+    // 🔥 3. Prevent duplicate processing (CHỈ chặn khi đã trả tiền VÀ đã gửi mail)
+    if (order.status === "paid" && order.email_sent) {
+      return { statusCode: 200, body: "Already fully processed" };
+    }
+
+    // 🔥 4. Check amount match
     if (Number(order.final_amount) !== Number(transferAmount)) {
-    console.log("ERROR: Amount mismatch",
-        order.final_amount,
-        transferAmount
-      );
-      return {
-        statusCode: 400,
-        body: "Amount mismatch",
-      };
+      console.log("ERROR: Amount mismatch", order.final_amount, transferAmount);
+      return { statusCode: 400, body: "Amount mismatch" };
     }
 
-    // 🔥 Prevent duplicate processing
-    if (order.status === "paid") {
-      return {
-        statusCode: 200,
-        body: "Already processed",
-      };
-    }
-
-    // 🔥 Fetch order items + join products
+    // 🔥 5. Fetch order items + join products
     const { data: orderItems, error: itemsError } = await supabase
       .from("order_items")
       .select(`
@@ -89,87 +59,71 @@ export const handler: Handler = async (event) => {
         products (
           title,
           download_url
-        )s
+        )
       `)
       .eq("order_id", order.id);
 
-console.log("ORDER ITEMS:", orderItems);
-console.log("ITEM ERROR:", itemsError);
-
     if (itemsError || !orderItems || orderItems.length === 0) {
-      return {
-        statusCode: 400,
-        body: "Order items not found",
-      };
+      return { statusCode: 400, body: "Order items not found" };
     }
 
-    // 🔥 Update order to paid
-    const { data: updateData, error: updateError } = await supabase
-      .from("orders")
-      .update({
-        status: "paid",
-        sepay_txn_id: referenceCode,
-        paid_at: new Date().toISOString(),
-      })
-      .eq("id", order.id)
-      .select();
-    
-    if (order.email_sent) {
-      console.log("EMAIL ALREADY SENT - SKIP");
-      return {
-        statusCode: 200,
-        body: "Already processed",
-      };
+    // 🔥 6. Update order to paid (Chỉ update nếu chưa paid)
+    if (order.status !== "paid") {
+      const { error: updateError } = await supabase
+        .from("orders")
+        .update({
+          status: "paid",
+          sepay_txn_id: referenceCode,
+          paid_at: new Date().toISOString(),
+        })
+        .eq("id", order.id);
+
+      if (updateError) {
+        throw new Error("Failed to update order status");
+      }
     }
 
-    if (updateError) {
-      console.log("ERROR: Failed to update order");
-      return {
-        statusCode: 500,
-        body: "Failed to update order",
-      };
+    // 🔥 7. Send Email (Chỉ gửi nếu chưa gửi)
+    if (!order.email_sent) {
+      // Build email content với Optional Chaining an toàn
+      const emailContent = paymentSuccessContent({
+        orderCode: order.order_code,
+        products: orderItems.map((item: any) => ({
+          name: item.products?.title || "Sản phẩm không xác định",
+          downloadUrl: item.products?.download_url || "#",
+        })),
+      });
+
+      const html = emailLayout({
+        title: "Thanh toán thành công 🎉",
+        content: emailContent,
+      });
+
+      console.log("SENDING EMAIL TO:", order.email);
+      await sendEmail({
+        to: order.email,
+        subject: `Tải template của bạn - ${order.payment_code}`,
+        html,
+      });
+
+      // Update email_sent = true sau khi gửi thành công
+      await supabase
+        .from("orders")
+        .update({ email_sent: true })
+        .eq("id", order.id);
+
+      console.log("EMAIL SENT AND FLAG UPDATED");
     }
-
-    // 🔥 Build email content
-    const emailContent = paymentSuccessContent({
-      orderCode: order.order_code,
-      products: orderItems.map((item: any) => ({
-        name: item.products.title,
-        downloadUrl: item.products.download_url,
-      })),
-    });
-
-    const html = emailLayout({
-      title: "Thanh toán thành công 🎉",
-      content: emailContent,
-    });
-
-    console.log("SENDING EMAIL TO:", order.email);
-    // 🔥 Send email
-    await sendEmail({
-      to: order.email,
-      subject: `Tải template của bạn - ${order.payment_code}`,
-      html,
-    });
-    console.log("EMAIL SEND FUNCTION FINISHED");
-
-    // 🔥 update email_sent = true
-    await supabase
-      .from("orders")
-      .update({ email_sent: true })
-      .eq("id", order.id);
-
-    console.log("EMAIL_SENT FLAG UPDATED");    
 
     return {
       statusCode: 200,
       body: "Payment confirmed and email sent",
     };
-  } catch (error) {
+  } catch (error: any) {
     console.error("Webhook error:", error);
     return {
       statusCode: 500,
-      body: "Server error",
+      body: JSON.stringify({ message: "Server error", error: error.message }),
     };
   }
 };
