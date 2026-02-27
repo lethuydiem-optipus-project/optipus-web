@@ -9,23 +9,23 @@ const features = [
   {
     icon: <Layout className="w-6 h-6" />,
     title: "Second Brain OS",
-    description: "A centralized dashboard to capture, organize, and distill your thoughts into actionable projects.",
+    description: "Trung tâm lưu trữ và phân loại kiến thức, giúp bạn chuyển hóa ý tưởng thành các dự án hành động cụ thể.",
     stat: "98.2",
     statLabel: "Focus Score"
   },
   {
     icon: <GitGraph className="w-6 h-6" />,
     title: "Project Pipelines",
-    description: "Kanban boards and timelines that sync automatically. Visualize progress without the manual upkeep.",
+    description: "Theo dõi tiến độ qua Kanban và Timeline tự động. Trực quan hóa mọi giai đoạn mà không cần cập nhật thủ công.",
     stat: "45.0",
     statLabel: "Hours Saved"
   },
   {
     icon: <Database className="w-6 h-6" />,
-    title: "CRM Integration",
-    description: "Manage client relationships with linked databases for meetings, deliverables, and invoices.",
+    title: "Quản Lý Tài Chính",
+    description: "Kiểm soát dòng tiền, ngân sách và mục tiêu tiết kiệm thông qua các cơ sở dữ liệu liên kết thông minh.",
     stat: "12.4",
-    statLabel: "Conv. Rate"
+    statLabel: "Tiết Kiệm"
   }
 ];
 
@@ -34,12 +34,11 @@ const Features: React.FC = () => {
     <Section id="features">
       <div className="mb-16 max-w-2xl">
         <h2 className="text-5xl md:text-7xl font-display font-bold text-zinc-900 uppercase tracking-tighter mb-6">
-          Productivity <br />
-          <span className="text-zinc-400">Intelligence.</span>
+          OPTIMIZED <br />
+          <span className="text-zinc-400">SYSTEMS</span>
         </h2>
         <p className="text-lg text-zinc-600">
-          Deploy predictive systems that recursively optimize your operations. 
-          ProNotion bridges the gap between raw notes and actionable foresight.
+          Triển khai các hệ thống quản trị thông minh giúp tự động hóa lộ trình học tập và làm việc. Optipus xóa bỏ khoảng cách giữa những ghi chú rời rạc và kết quả thực tế.
         </p>
         <div className="mt-8">
            <Link to="/templates">
@@ -86,8 +85,8 @@ const Features: React.FC = () => {
             <div className="w-12 h-12 bg-zinc-50 rounded-full flex items-center justify-center text-accent-500 mb-6 border border-zinc-200">
               <Cpu />
             </div>
-            <h3 className="text-2xl font-bold text-zinc-900 mb-2">Automated Workflows</h3>
-            <p className="text-zinc-600">Drag-and-drop editor to build and customize your AI data pipelines without writing code.</p>
+            <h3 className="text-2xl font-bold text-zinc-900 mb-2">Quy Trình Tự Động</h3>
+            <p className="text-zinc-600">Hệ thống liên kết dữ liệu giúp tự động hóa việc nhắc lịch, tính toán ngân sách và cập nhật tiến độ học tập.</p>
           </div>
           {/* Decorative Grid */}
           <div className="absolute inset-0 z-0 opacity-5 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')]"></div>
@@ -97,23 +96,23 @@ const Features: React.FC = () => {
            <div className="space-y-3 font-mono text-sm relative z-10">
              <div className="flex items-center gap-3 text-green-600">
                <span className="w-2 h-2 rounded-full bg-green-500"></span>
-               Cluster scaling initiated
+               Đang cập nhật lịch thi mới...
                <span className="ml-auto text-zinc-400">12:04:45</span>
              </div>
              <div className="flex items-center gap-3 text-green-600">
                <span className="w-2 h-2 rounded-full bg-green-500"></span>
-               Redis cache cleared
+               Đã đồng bộ ngân sách tháng 2
                <span className="ml-auto text-zinc-400">12:04:42</span>
              </div>
              <div className="flex items-center gap-3 text-yellow-600">
                <span className="w-2 h-2 rounded-full bg-yellow-500 animate-pulse"></span>
-               Optimizing shards...
+               Đang tối ưu lộ trình học tập...
              </div>
            </div>
            
            <div className="mt-8 relative z-10">
-             <h3 className="text-2xl font-bold text-zinc-900 mb-2">Real-time Mitigation</h3>
-             <p className="text-zinc-600">Trigger preventative workflows and route alerts to the right engineers.</p>
+             <h3 className="text-2xl font-bold text-zinc-900 mb-2">Kiểm Soát Thời Gian Thực</h3>
+             <p className="text-zinc-600">Nhận thông báo ngay lập tức về các deadline sắp tới và điều chỉnh khối lượng công việc phù hợp.</p>
            </div>
         </div>
       </div>

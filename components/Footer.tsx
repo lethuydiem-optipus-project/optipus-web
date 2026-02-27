@@ -23,7 +23,7 @@ const Footer: React.FC = () => {
         isOpen={isSuccessOpen} 
         onClose={() => setIsSuccessOpen(false)}
         title="Đăng ký thành công"
-        message="Cảm ơn bạn đã quan tâm. Bạn sẽ nhận được những cập nhật mới nhất từ ProNotion qua email."
+        message="Cảm ơn bạn đã quan tâm. Bạn sẽ nhận được những cập nhật mới nhất từ OptiPus qua email."
       />
 
       <div className="max-w-7xl mx-auto px-4 md:px-6">
@@ -40,21 +40,21 @@ const Footer: React.FC = () => {
 
               <div className="max-w-3xl mx-auto relative z-10">
                 <h2 className="text-4xl md:text-5xl lg:text-6xl font-display font-bold text-zinc-900 mb-6 tracking-tight">
-                  Ngừng Phản Ứng. <br/>
-                  <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-600 to-purple-500">Bắt Đầu Dự Đoán.</span>
+                  Làm Chủ Quy Trình. <br/>
+                  <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-600 to-purple-500">Khai Phá Tiềm Năng.</span>
                 </h2>
                 <p className="text-lg text-zinc-500 mb-10 leading-relaxed max-w-2xl mx-auto">
-                  Gia nhập cùng 4,500+ công ty đang sử dụng ProNotion để xây dựng tương lai cho hoạt động của họ.
+                  Tham gia cùng cộng đồng 5,000+ người dùng đang tối ưu hóa cuộc sống và công việc cùng hệ sinh thái Optipus.
                 </p>
                 <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
                    <Link to="/templates" className="w-full sm:w-auto">
                      <Button size="lg" className="w-full rounded-full px-10 shadow-lg shadow-brand-500/20">
-                        Bắt Đầu Miễn Phí
+                        Nhận Template Ngay
                      </Button>
                    </Link>
                    <Link to="/contact" className="w-full sm:w-auto">
                      <Button variant="secondary" size="lg" className="w-full rounded-full px-10 border-brand-200 text-brand-700 hover:bg-brand-50 hover:border-brand-300">
-                        Liên Hệ Sales
+                        Tư Vấn Giải Pháp
                      </Button>
                    </Link>
                 </div>
@@ -71,7 +71,7 @@ const Footer: React.FC = () => {
                    <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-brand-500 to-purple-600 flex items-center justify-center text-white shadow-md shadow-brand-500/20">
                       <Zap size={18} fill="currentColor" />
                    </div>
-                   <span className="font-display font-bold text-xl text-zinc-900 tracking-tight">ProNotion</span>
+                   <span className="font-display font-bold text-xl text-zinc-900 tracking-tight">OptiPus</span>
                  </div>
                  
                  <div className="max-w-sm">
@@ -116,8 +116,8 @@ const Footer: React.FC = () => {
                   <div>
                     <h4 className="font-bold text-zinc-900 mb-6">Công Ty</h4>
                     <ul className="space-y-4 text-zinc-500">
-                      <li><a href="#" className="hover:text-brand-600 transition-colors">Về Chúng Tôi</a></li>
-                      <li><a href="#" className="hover:text-brand-600 transition-colors">Khách Hàng</a></li>
+                      <li><a href="#" className="hover:text-brand-600 transition-colors">Về Optipus</a></li>
+                      <li><a href="#" className="hover:text-brand-600 transition-colors">Đánh giá</a></li>
                       <li><Link to="/contact" className="hover:text-brand-600 transition-colors">Liên Hệ</Link></li>
                       <li><Link to="#" className="hover:text-brand-600 transition-colors">Site map</Link></li>
                     </ul>

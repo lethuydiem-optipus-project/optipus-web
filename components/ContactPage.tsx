@@ -20,7 +20,7 @@ const ContactPage: React.FC = () => {
     {
       name: 'TikTok',
       icon: <Video className="w-6 h-6" />,
-      link: '#',
+      link: 'https://www.tiktok.com/@optipus.notion',
       description: 'Follow video ngắn',
       color: 'hover:text-pink-500 hover:border-pink-200 hover:bg-pink-50'
     },

@@ -10,22 +10,22 @@ const Testimonials: React.FC = () => {
 
   const people = [
     {
-      name: "Patrick Nawrocki",
-      role: "UX Manager @ Superhabits",
+      name: "Hoàng Nam",
+      role: "Sinh viên năm cuối FTU",
       image: "https://picsum.photos/400/500?grayscale&random=1",
-      quote: "ProNotion transformed our chaotic Jira backlog into a streamlined predictive engine. We ship 2x faster now."
+      quote: "Optipus giúp mình quản lý toàn bộ tài liệu khóa luận và lịch thực tập một cách khoa học. Không còn tình trạng quên deadline hay lạc mất file nữa."
     },
     {
-      name: "Pri Patel",
-      role: "Product Designer @ Lightdash",
+      name: "Minh Thư",
+      role: "Content Freelancer",
       image: "https://picsum.photos/400/500?grayscale&random=2",
-      quote: "The ability to connect disparate data points and see the future of our roadmap is a superpower. It's truly a second brain."
+      quote: "Hệ thống Second Brain của Optipus thực sự là một cuộc cách mạng cho workflow của mình. Khả năng kết nối ý tưởng và quản lý dự án khách hàng rất tuyệt vời"
     },
     {
-      name: "Rob West",
-      role: "CEO @ Kingdom Advisors",
+      name: "Đức Anh",
+      role: "Founder @ Small Startup",
       image: "https://picsum.photos/400/500?grayscale&random=3",
-      quote: "I stopped reacting to fires and started preventing them. The ROI on this system is immeasurable for our operations."
+      quote: "Mình đã tiết kiệm được hàng giờ mỗi tuần nhờ các quy trình tự động hóa trong template. Chi phí đầu tư một lần nhưng giá trị nhận lại là mãi mãi."
     }
   ];
 
@@ -68,10 +68,10 @@ const Testimonials: React.FC = () => {
         <div className="flex flex-col">
           <div className="mb-12 text-left">
             <h2 className="text-4xl md:text-5xl font-display font-bold text-zinc-900 mb-6 tracking-tight">
-              What People <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-600 to-purple-400">Are Saying</span>
+              Người dùng nói gì<span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-600 to-purple-400"> về OptiPus</span>
             </h2>
             <p className="text-lg text-zinc-500 leading-relaxed max-w-xl">
-              Real feedback from designers and teams who use ProNotion every day. Discover how our predictive tools transformed their workflow.
+              Những phản hồi thực tế từ các cá nhân và đội ngũ đã tối ưu hóa hiệu suất làm việc mỗi ngày cùng Optipus. Khám phá cách chúng tôi giúp họ làm chủ quy trình.
             </p>
           </div>
 
@@ -147,7 +147,7 @@ const Testimonials: React.FC = () => {
           <div className="flex justify-start pl-4 md:pl-0">
              <Link to="/blog">
                <Button variant="outline" className="rounded-full px-8 py-3 border-zinc-200 hover:border-brand-300 hover:text-brand-700 bg-white/50 backdrop-blur-sm">
-                 View More Stories
+                 Đọc thêm chia sẻ
                </Button>
              </Link>
           </div>

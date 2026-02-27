@@ -22,10 +22,10 @@ const Pricing: React.FC = () => {
       <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-6 relative z-10">
         <div className="max-w-2xl">
           <h2 className="text-4xl md:text-5xl font-display font-bold text-zinc-900 mb-4 tracking-tight">
-            Predictable Pricing.
+            Templates Tiêu Biểu
           </h2>
           <p className="text-lg text-zinc-500">
-            Transparent one-time costs. No hidden fees or subscriptions.
+            Sở hữu vĩnh viễn với chi phí một lần duy nhất. Không phí ẩn, không cần đăng ký định kỳ.
           </p>
         </div>
         <div className="flex-shrink-0">
@@ -106,7 +106,7 @@ const Pricing: React.FC = () => {
                      )}
                      <div className="flex items-baseline gap-1">
                        <span className="text-4xl font-bold text-zinc-900 tracking-tighter">{template.price}</span>
-                       <span className="text-xs font-bold text-zinc-400 uppercase tracking-wide">USD</span>
+                       <span className="text-xs font-bold text-zinc-400 uppercase tracking-wide">VNĐ</span>
                      </div>
                    </div>
                    <Button 

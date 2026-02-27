@@ -14,18 +14,18 @@ const HowItWorks: React.FC = () => {
         {/* Pill Label */}
         <div className="inline-block px-4 py-1.5 mb-8 rounded-full border border-brand-100 bg-brand-50/80 backdrop-blur-sm shadow-sm">
             <span className="text-xs font-bold tracking-[0.15em] text-brand-600 uppercase">
-                Methodology
+                QUY TRÌNH
             </span>
         </div>
         
         {/* Headline */}
         <h2 className="text-4xl md:text-6xl font-display font-bold text-zinc-900 mb-6 leading-tight tracking-tight">
-          How ProNotion <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-600 to-purple-400">Works</span>
+          Cách OptiPus <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-600 to-purple-400">Vận Hành</span>
         </h2>
         
         {/* Subtitle */}
         <p className="text-lg md:text-xl text-zinc-500 leading-relaxed">
-           A unified platform that streamlines the journey from raw data to actionable foresight. Connect your sources, train models continuously, and prevent incidents.
+          Một hệ thống nhất quán giúp đơn giản hóa hành trình từ những ý tưởng thô đến kết quả thực tế. Cá nhân hóa không gian làm việc, tối ưu hóa quy trình và làm chủ mọi kế hoạch.
         </p>
       </div>
 
@@ -36,9 +36,9 @@ const HowItWorks: React.FC = () => {
           <div className="w-16 h-16 rounded-full bg-gradient-to-br from-brand-50 to-brand-100 border border-brand-200 flex items-center justify-center text-2xl font-bold text-brand-700 mb-6 shadow-sm group-hover:scale-110 transition-transform duration-500">
             1
           </div>
-          <h3 className="text-xl font-bold text-zinc-900 mb-3 group-hover:text-brand-700 transition-colors">Connect Your Data</h3>
+          <h3 className="text-xl font-bold text-zinc-900 mb-3 group-hover:text-brand-700 transition-colors">Chọn Template Phù Hợp</h3>
           <p className="text-zinc-500 text-sm leading-relaxed max-w-xs mx-auto">
-            Integrate ProNotion with your existing workspace. It automatically ingests your schema and normalizes historical data.
+            Khám phá kho thư viện đa dạng của Optipus và chọn bộ Template phù hợp với nhu cầu học tập, quản lý tài chính hoặc dự án cá nhân của bạn.
           </p>
           
           {/* Mobile Divider (Bottom) */}
@@ -53,9 +53,9 @@ const HowItWorks: React.FC = () => {
            <div className="w-16 h-16 rounded-full bg-gradient-to-br from-brand-50 to-brand-100 border border-brand-200 flex items-center justify-center text-2xl font-bold text-brand-700 mb-6 shadow-sm group-hover:scale-110 transition-transform duration-500 delay-100">
             2
           </div>
-          <h3 className="text-xl font-bold text-zinc-900 mb-3 group-hover:text-brand-700 transition-colors">Continuous Learning</h3>
+          <h3 className="text-xl font-bold text-zinc-900 mb-3 group-hover:text-brand-700 transition-colors">Cá Nhân Hóa Template</h3>
           <p className="text-zinc-500 text-sm leading-relaxed max-w-xs mx-auto">
-            ProNotion trains custom models on your specific environment, constantly refining its accuracy as new data flows in.
+            Dễ dàng tùy chỉnh các trường dữ liệu và cấu trúc theo thói quen của riêng bạn. Hệ thống sẽ giúp bạn tổ chức thông tin một cách khoa học và tự động.
           </p>
 
           {/* Mobile Divider (Bottom) */}
@@ -70,9 +70,9 @@ const HowItWorks: React.FC = () => {
            <div className="w-16 h-16 rounded-full bg-gradient-to-br from-brand-50 to-brand-100 border border-brand-200 flex items-center justify-center text-2xl font-bold text-brand-700 mb-6 shadow-sm group-hover:scale-110 transition-transform duration-500 delay-200">
             3
           </div>
-          <h3 className="text-xl font-bold text-zinc-900 mb-3 group-hover:text-brand-700 transition-colors">Predict & Prevent</h3>
+          <h3 className="text-xl font-bold text-zinc-900 mb-3 group-hover:text-brand-700 transition-colors">Theo Dõi & Tối Ưu</h3>
           <p className="text-zinc-500 text-sm leading-relaxed max-w-xs mx-auto">
-            View forecasts on dashboards or trigger webhooks to automate preventative actions. One-click integrations make execution seamless.
+            Bắt đầu vận hành quy trình mới, theo dõi tiến độ qua các Dashboard trực quan và nhận cảnh báo về deadline để luôn chủ động trong mọi tình huống.
           </p>
         </div>
       </div>
@@ -81,7 +81,7 @@ const HowItWorks: React.FC = () => {
       <div className="relative z-10 flex justify-center mt-12">
         <Link to="/templates">
           <Button size="lg" className="rounded-full px-10 shadow-lg shadow-brand-500/20 hover:shadow-brand-500/40">
-            Get Started
+            Bắt Đầu Ngay
           </Button>
         </Link>
       </div>

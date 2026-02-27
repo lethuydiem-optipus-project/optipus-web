@@ -27,15 +27,15 @@ const Hero: React.FC = () => {
           {/* Content (Left) */}
           <div className="flex flex-col justify-center order-2 lg:order-1">
             <h1 className="text-6xl md:text-8xl lg:text-9xl font-display font-bold text-zinc-900 leading-[0.85] tracking-tighter uppercase mb-8">
-              <span className="text-transparent bg-clip-text bg-gradient-to-b from-zinc-900 via-zinc-800 to-zinc-500">ProNotion</span><br />
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-600 via-brand-500 to-accent-400">Hệ Điều Hành</span><br />
-              <span className="text-zinc-900 drop-shadow-xl">Doanh Nghiệp</span>
+              <span className="text-transparent bg-clip-text bg-gradient-to-b from-zinc-900 via-zinc-800 to-zinc-500">OptiPus</span><br />
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-600 via-brand-500 to-accent-400">Giải pháp quản trị</span><br />
+              <span className="text-zinc-900 drop-shadow-xl">Thông Minh</span>
             </h1>
             
             <div className="flex flex-col gap-8 mt-6">
               <div className="max-w-xl">
                 <p className="text-xl md:text-2xl text-zinc-600 font-light leading-relaxed">
-                  Phân tích workflow của bạn trong thời gian thực để loại bỏ sự hỗn loạn, phát hiện điểm nghẽn và dự báo thành công—giúp đội ngũ của bạn hành động trước khi deadline trôi qua.
+                  Hệ sinh thái Template Notion chuẩn hóa quy trình làm việc và học tập. Giúp bạn quản lý deadline, tối ưu hóa hiệu suất và làm chủ thời gian một cách khoa học nhất.
                 </p>
               </div>
               
@@ -91,8 +91,8 @@ const Hero: React.FC = () => {
                    
                    {/* Revenue Card */}
                    <div className="p-4 bg-zinc-50 border border-zinc-100 rounded-lg shadow-sm">
-                      <div className="text-[10px] text-zinc-400 uppercase tracking-widest font-bold mb-2">Dự báo doanh thu</div>
-                      <div className="text-2xl font-display font-bold text-zinc-900 tracking-tight">$42,300</div>
+                      <div className="text-[10px] text-zinc-400 uppercase tracking-widest font-bold mb-2">Ngân sách tháng này</div>
+                      <div className="text-2xl font-display font-bold text-zinc-900 tracking-tight">12.000.000đ</div>
                       <div className="text-[10px] text-emerald-600 flex items-center gap-1 mt-1 font-mono">
                         ▲ 14.2% so với tháng trước
                       </div>
@@ -143,13 +143,13 @@ const Hero: React.FC = () => {
 
         {/* Clients Section moved inside Hero to keep it compact if needed, but styling remains consistent */}
         <div className="mt-20 md:mt-32 pt-10">
-           <p className="text-zinc-400 text-xs font-bold tracking-widest mb-8 uppercase">Được tin dùng bởi các nhà đổi mới tại</p>
+           <p className="text-zinc-400 text-xs font-bold tracking-widest mb-8 uppercase">Giải pháp tối ưu cho hơn 1000+ người dùng</p>
            <div className="flex flex-wrap gap-8 md:gap-16 items-center opacity-40 grayscale hover:grayscale-0 transition-all duration-500">
-             <div className="text-xl font-display font-bold text-zinc-900">ACME<span className="font-light">CORP</span></div>
-             <div className="text-xl font-display font-bold text-zinc-900">VORTEX</div>
-             <div className="text-xl font-display font-bold text-zinc-900">STRATOS</div>
-             <div className="text-xl font-display font-bold text-zinc-900">HYPERION</div>
-             <div className="text-xl font-display font-bold text-zinc-900">NEXUS</div>
+             <div className="text-xl font-display font-bold text-zinc-900">STUDENTS</div>
+             <div className="text-xl font-display font-bold text-zinc-900">FREELANCERS</div>
+             <div className="text-xl font-display font-bold text-zinc-900">STARTUPS</div>
+             <div className="text-xl font-display font-bold text-zinc-900">MARKETERS</div>
+             <div className="text-xl font-display font-bold text-zinc-900">CREATERS</div>
            </div>
         </div>
 

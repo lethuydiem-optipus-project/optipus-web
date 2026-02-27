@@ -122,7 +122,7 @@ const Header: React.FC = () => {
           <Link to="/" className="flex items-center gap-2 z-20">
             <Zap className="text-brand-600 w-6 h-6" />
             <span className="font-bold tracking-tighter text-zinc-900 font-display uppercase text-xl">
-              Pro<span className="text-zinc-400">Notion</span>
+              Optipus<span className="text-zinc-400"></span>
             </span>
           </Link>
 
