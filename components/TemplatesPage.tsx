@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Section } from './ui/Section';
 import { Button } from './ui/Button';
-import { Check, Star, ShoppingCart } from 'lucide-react';
+import { Star, ShoppingCart } from 'lucide-react';
 import { useCart } from '../context/CartContext';
 import { useToast } from '../context/ToastContext';
 import { Link } from 'react-router-dom';
@@ -54,7 +54,7 @@ const TemplatesPage: React.FC = () => {
       <LoginGuardModal />
       <Section className="!py-10">
         {/* Header Section */}
-        <div className="flex flex-col md:flex-row md:items-end justify-between gap-8 mb-12">
+        <div className="flex flex-col md:flex-row md:items-end justify-between gap- mb-12">
           <div className="max-w-2xl">
             <h1 className="text-4xl md:text-5xl font-display font-bold text-zinc-900 mb-4 tracking-tight">
               Latest Templates
@@ -87,10 +87,12 @@ const TemplatesPage: React.FC = () => {
           {filteredTemplates.map((template) => (
             <div
               key={template.id}
-              className="group bg-white rounded-2xl border border-zinc-200 overflow-hidden hover:shadow-[0_20px_40px_-15px_rgba(168,85,247,0.15)] hover:border-brand-200 transition-all duration-300 flex flex-col"
+              // Thêm h-full để các card trong cùng 1 hàng luôn cao bằng nhau
+              className="group bg-white rounded-2xl border border-zinc-200 overflow-hidden hover:shadow-[0_20px_40px_-15px_rgba(168,85,247,0.15)] hover:border-brand-200 transition-all duration-300 flex flex-col h-full"
             >
-              {/* Thumbnail */}
-              <Link to={`/templates/${template.slug}`} className="relative h-56 overflow-hidden block cursor-pointer">
+              {/* Thumbnail - Ảnh vuông 1:1, bo góc trên */}
+              <Link to={`/templates/${template.slug}`}
+              className="relative aspect-square overflow-hidden rounded-t-2xl block cursor-pointer">
                 <img
                   src={template.image}
                   alt={template.title}
@@ -118,30 +120,19 @@ const TemplatesPage: React.FC = () => {
               <div className="p-6 flex flex-col flex-1">
                 <Link to={`/templates/${template.slug}`} className="block group-hover:text-brand-600 transition-colors">
                   <div className="flex justify-between items-start mb-3">
-                    <h3 className="text-xl font-bold text-zinc-900 font-display">
+                    <h3 className="text-lg font-bold text-zinc-900 font-display">
                       {template.title}
                     </h3>
                   </div>
                 </Link>
 
-                <p className="text-sm text-zinc-500 mb-6 leading-relaxed">
+                {/* Mô tả: Giới hạn 2 dòng, tự thêm "...", cố định chiều cao tối thiểu để card ko bị lệch */}
+                <p className="text-xs text-zinc-500 mb-0 leading-relaxed line-clamp-2 min-h-[40px]">
                   {template.description}
                 </p>
-
-                {/* Features List */}
-                <div className="space-y-2 mb-8 flex-1">
-                  {template.features.map((feature: string, idx: number) => (
-                    <div key={idx} className="flex items-center gap-2.5">
-                      <div className="flex-shrink-0 w-4 h-4 rounded-full bg-green-50 flex items-center justify-center">
-                        <Check className="w-3 h-3 text-green-600" strokeWidth={3} />
-                      </div>
-                      <span className="text-sm text-zinc-600">{feature}</span>
-                    </div>
-                  ))}
-                </div>
-
-                {/* Footer */}
-                <div className="pt-5 border-t border-zinc-50 flex flex-col gap-4">
+                <div className="w-32 h-0.5 bg-brand-500 mb-2 my-2 mx-auto"></div>
+                {/* Footer - mt-auto đẩy phần này xuống sát đáy card */}
+                <div className="pt-0 border-t border-zinc-50 flex flex-col gap-4">
                   <div className="flex justify-between items-center">
                     <div>
                       {template.originalPrice && (

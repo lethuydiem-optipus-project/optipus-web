@@ -27,21 +27,21 @@ const ContactPage: React.FC = () => {
     {
       name: 'Facebook',
       icon: <Facebook className="w-6 h-6" />,
-      link: '#',
+      link: 'https://www.facebook.com/optipus.vn',
       description: 'Fanpage chính thức',
       color: 'hover:text-blue-600 hover:border-blue-200 hover:bg-blue-50'
     },
     {
       name: 'Hotline / Zalo',
       icon: <Phone className="w-6 h-6" />,
-      link: '#',
-      description: '0909 123 456',
+      link: 'https://zalo.me/0988971620',
+      description: '098 897 1620',
       color: 'hover:text-green-600 hover:border-green-200 hover:bg-green-50'
     },
     {
       name: 'Instagram',
       icon: <Instagram className="w-6 h-6" />,
-      link: '#',
+      link: 'https://www.instagram.com/optipus_tp_notion',
       description: 'Behind the scenes',
       color: 'hover:text-orange-600 hover:border-orange-200 hover:bg-orange-50'
     }
@@ -58,10 +58,10 @@ const ContactPage: React.FC = () => {
         {/* Header */}
         <div className="text-center max-w-3xl mx-auto mb-16">
           <h1 className="text-4xl md:text-6xl font-display font-bold text-zinc-900 mb-6 tracking-tight">
-            Liên Hệ <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-600 to-accent-500">ProNotion</span>
+            Liên Hệ <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-600 to-accent-500">OptiPus</span>
           </h1>
-          <p className="text-lg md:text-xl text-zinc-500 leading-relaxed">
-            Bạn có câu hỏi hoặc góp ý? Kết nối ngay với chúng tôi qua các kênh bên dưới hoặc gửi tin nhắn trực tiếp.
+          <p className="text-sm md:text-base text-zinc-500 leading-relaxed">
+            Bạn có câu hỏi hoặc góp ý? <br /> Kết nối ngay với chúng tôi qua các kênh bên dưới hoặc gửi tin nhắn trực tiếp.
           </p>
         </div>
 

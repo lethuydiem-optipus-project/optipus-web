@@ -73,7 +73,7 @@ export const AuthForm: React.FC<AuthFormProps> = ({
         <p className="text-zinc-500">
           {view === 'login'
             ? 'Chào mừng bạn quay trở lại với ProNotion'
-            : 'Tham gia cùng 4,500+ doanh nghiệp khác'}
+            : 'Tham gia cùng 4,500+ người dùng khác'}
         </p>
       </div>
 
