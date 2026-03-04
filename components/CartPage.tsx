@@ -81,7 +81,7 @@ const CartPage: React.FC = () => {
                 <div className="flex-1 w-full text-center sm:text-left">
                   <h3 className="font-bold text-zinc-900 text-lg mb-1">{item.title}</h3>
                   <p className="text-sm text-zinc-500 mb-3">{item.category}</p>
-                  <div className="font-bold text-brand-600">${item.price}</div>
+                  <div className="font-bold text-brand-600">{item.price.toLocaleString("vi-VN")}đ</div>
                 </div>
 
                 {/* Quantity & Actions */}
@@ -104,7 +104,7 @@ const CartPage: React.FC = () => {
                   </div>
 
                   <div className="font-mono font-medium text-zinc-700 w-20 text-right">
-                    ${(item.price * item.quantity).toFixed(2)}
+                    {(item.price * item.quantity).toLocaleString("vi-VN")}đ
                   </div>
 
                   <button 
@@ -130,11 +130,11 @@ const CartPage: React.FC = () => {
                 </div>
                 <div className="flex justify-between text-zinc-600">
                   <span>Tạm tính</span>
-                  <span className="font-mono">${cartTotal.toFixed(2)}</span>
+                  <span className="font-mono">{cartTotal.toLocaleString("vi-VN")}đ</span>
                 </div>
                 <div className="flex justify-between text-xl font-bold text-zinc-900 pt-2">
                   <span>Tổng cộng</span>
-                  <span className="font-mono text-brand-600">${finalTotal.toFixed(2)}</span>
+                  <span className="font-mono text-brand-600">{finalTotal.toLocaleString("vi-VN")}đ</span>
                 </div>
               </div>
 

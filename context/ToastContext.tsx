@@ -7,7 +7,7 @@ export interface ToastData {
   id: string;
   title: string;
   image: string;
-  price: string;
+  price: number;
 }
 
 interface ToastContextType {
@@ -67,7 +67,7 @@ export const ToastProvider: React.FC<{ children: React.ReactNode }> = ({ childre
                </div>
                <div className="flex-1 min-w-0">
                  <h4 className="font-bold text-sm text-zinc-900 truncate">{toast.title}</h4>
-                 <div className="text-zinc-500 text-sm">{toast.price}</div>
+                 <div className="text-zinc-500 text-sm">{toast.price.toLocaleString("vi-VN")}đ</div>
                </div>
              </div>
 

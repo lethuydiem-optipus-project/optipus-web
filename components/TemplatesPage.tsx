@@ -1,3 +1,4 @@
+import { Helmet } from "react-helmet-async";
 import React, { useState, useEffect } from 'react';
 import { Section } from './ui/Section';
 import { Button } from './ui/Button';
@@ -50,7 +51,29 @@ const TemplatesPage: React.FC = () => {
   };
 
   return (
-    <div className="pt-24 pb-20 min-h-screen bg-white">
+    <>
+      <Helmet>
+        <title>Template Notion Tăng Năng Suất | OptiPus</title>
+
+        <meta
+          name="description"
+          content="Khám phá bộ sưu tập template Notion giúp quản lý công việc, lập kế hoạch nội dung và tăng năng suất. Phù hợp cho sinh viên, creator và marketer."
+        />
+
+        <meta
+          property="og:title"
+          content="Template Notion Tăng Năng Suất | OptiPus"
+        />
+
+        <meta
+          property="og:description"
+          content="Bộ template Notion giúp quản lý công việc, content và dự án hiệu quả."
+        />
+
+        <meta property="og:image" content="/og-cover.png" />
+      </Helmet>
+
+      <div className="pt-24 pb-20 min-h-screen bg-white">
       <LoginGuardModal />
       <Section className="!py-10">
         {/* Header Section */}
@@ -137,11 +160,11 @@ const TemplatesPage: React.FC = () => {
                     <div>
                       {template.originalPrice && (
                         <div className="text-sm text-zinc-400 line-through font-medium mb-1">
-                          {template.originalPrice}
+                          {template.originalPrice.toLocaleString("vi-VN")}đ
                         </div>
                       )}
                       <div className="text-2xl font-bold text-zinc-900 tracking-tight">
-                        {template.price}
+                        {template.price.toLocaleString("vi-VN")}đ
                       </div>
                     </div>
                     <div className="flex items-center gap-1 bg-zinc-50 px-2 py-1 rounded text-xs font-bold text-zinc-600">
@@ -175,6 +198,7 @@ const TemplatesPage: React.FC = () => {
         </div>
       </Section>
     </div>
+  </>  
   );
 };
 

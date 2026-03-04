@@ -34,6 +34,7 @@ type UITemplate = {
   originalPrice: string | null;
   rating: number;
   bestseller: boolean;
+  shortDescription?: string;
 };
 
 
@@ -58,10 +59,11 @@ export function adaptProductToTemplate(p: any): UITemplate {
     image: p.cover_image,
     gallery: p.gallery ?? [],
     category: TAG_LABEL_MAP[p.tag ?? ''] || 'Other',
-    description: p.short_description || '',
+    description: p.description || '',
+    shortDescription: p.short_description || '',
     features: extractFeatures(p.description),
-    price: formatPrice(p.price),
-    originalPrice: p.original_price ? formatPrice(p.original_price) : null,
+    price: p.price,
+    originalPrice: p.original_price ?? null,
     rating: p.rating ?? 4.8,
     bestseller: (p.rating ?? 0) >= 4.9,
   };

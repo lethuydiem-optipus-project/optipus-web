@@ -120,10 +120,12 @@ const Header: React.FC = () => {
         <div className="max-w-7xl mx-auto px-6 md:px-12 flex items-center justify-between relative">
           {/* Logo */}
           <Link to="/" className="flex items-center gap-2 z-20">
-            <Zap className="text-brand-600 w-6 h-6" />
-            <span className="font-bold tracking-tighter text-zinc-900 font-display uppercase text-xl">
-              Optipus<span className="text-zinc-400"></span>
-            </span>
+              <img
+                src="/logo_large.png"
+                alt="Optipus"
+                className="h-14 object-contain"
+              />
+            
           </Link>
 
           {/* Desktop Nav */}

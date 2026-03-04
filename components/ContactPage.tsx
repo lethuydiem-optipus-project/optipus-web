@@ -1,4 +1,5 @@
 
+import { Helmet } from "react-helmet-async";
 import React, { useState } from 'react';
 import { Section } from './ui/Section';
 import { Button } from './ui/Button';
@@ -48,7 +49,30 @@ const ContactPage: React.FC = () => {
   ];
 
   return (
-    <div className="pt-24 pb-20 min-h-screen bg-white">
+    <>
+      <Helmet>
+        <title>Liên Hệ OptiPus | Hỗ Trợ Template Notion</title>
+
+        <meta
+          name="description"
+          content="Liên hệ OptiPus để được hỗ trợ về template Notion, hợp tác hoặc gửi góp ý. Kết nối với chúng tôi qua Facebook, TikTok, Zalo hoặc gửi tin nhắn trực tiếp."
+        />
+
+        <meta
+          property="og:title"
+          content="Liên Hệ OptiPus | Hỗ Trợ Template Notion"
+        />
+
+        <meta
+          property="og:description"
+          content="Kết nối với OptiPus qua Facebook, TikTok, Zalo hoặc gửi tin nhắn trực tiếp."
+        />
+
+        <meta property="og:image" content="/og-cover.png" />
+      </Helmet>
+
+      <div className="pt-24 pb-20 min-h-screen bg-white">
+
       <SuccessModal 
         isOpen={isSuccessOpen} 
         onClose={() => setIsSuccessOpen(false)} 
@@ -138,6 +162,7 @@ const ContactPage: React.FC = () => {
         </div>
       </Section>
     </div>
+    </>
   );
 };
 

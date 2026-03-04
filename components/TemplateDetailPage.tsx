@@ -1,3 +1,4 @@
+import { Helmet } from "react-helmet-async";
 import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate, Link } from 'react-router-dom';
 import { Section } from './ui/Section';
@@ -22,7 +23,7 @@ const TemplateDetailPage: React.FC = () => {
   const [allTemplates, setAllTemplates] = useState<any[]>([]);
   const [activeImage, setActiveImage] = useState<string | null>(null);
   const [loading, setLoading] = useState(true);
-
+  const [galleryIndex, setGalleryIndex] = useState(0);
 
   useEffect(() => {
     if (!slug) return;
@@ -119,8 +120,86 @@ const TemplateDetailPage: React.FC = () => {
         ].slice(0, 3)
       : relatedTemplates;
 
+  const galleryImages = [
+    template.image,
+    ...(template.gallery || [])
+  ];
+
+  const nextGallery = () => {
+    if (galleryIndex + 4 < galleryImages.length) {
+      setGalleryIndex(galleryIndex + 1);
+    }
+  };
+
+  const prevGallery = () => {
+    if (galleryIndex > 0) {
+      setGalleryIndex(galleryIndex - 1);
+    }
+  };
+
   return (
-    <div className="pt-24 pb-20 min-h-screen bg-white">
+    <>
+      <Helmet prioritizeSeoTags>
+
+      <title>
+      {template
+      ? `${template.title} Notion Template | Optipus`
+      : "Template Notion | Optipus"}
+      </title>
+
+      <meta
+      name="description"
+      content={template?.shortDescription  || ""}
+      />
+
+      <meta
+      name="keywords"
+      content={`${template?.title || ""}, template notion, notion template`}
+      />
+
+      <link
+      rel="canonical"
+      href={
+      template
+      ? `https://optipus.vn/templates/${template.slug}`
+      : "https://optipus.vn/templates"
+      }
+      />
+
+      <meta name="robots" content="index, follow" />
+
+      <meta name="author" content="Optipus" />
+
+      <meta
+      property="og:title"
+      content={template ? `${template.title} | Optipus` : "Template Notion | Optipus"}
+      />
+
+      <meta
+      property="og:description"
+      content={template?.short_description || ""}
+      />
+
+      <meta
+      property="og:image"
+      content={template?.image || "/og-cover.png"}
+      />
+
+      <meta
+      property="og:url"
+      content={
+      template
+      ? `https://optipus.vn/templates/${template.slug}`
+      : "https://optipus.vn/templates"
+      }
+      />
+
+      <meta property="og:type" content="product" />
+
+      </Helmet>
+
+      <div className="pt-24 pb-20 min-h-screen bg-white">
+
       <LoginGuardModal />
       <Section className="!py-10">
         {/* Breadcrumb */}
@@ -138,11 +217,11 @@ const TemplateDetailPage: React.FC = () => {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 mb-20">
           {/* Images */}
           <div className="space-y-4">
-            <div className="aspect-square w-full rounded-2xl overflow-hidden bg-zinc-100 border border-zinc-200">
+            <div className="aspect-square w-full rounded-2xl overflow-hidden bg-zinc-100 border border-zinc-200 flex items-center justify-center">
               <img
                 src={activeImage || template.image}
                 alt={template.title}
-                className="w-full h-full object-cover hover:scale-105 transition-transform duration-700"
+                className="w-full h-full object-contain transition-transform duration-700 group-hover:scale-105"
                 onError={(e) => {
                   e.currentTarget.src = template.image;
                 }}
@@ -150,27 +229,51 @@ const TemplateDetailPage: React.FC = () => {
             </div>
 
             {/* Gallery */}
-            <div className="grid grid-cols-4 gap-4">
-              {template.gallery?.map((img: string, i: number) => (
+{/* Gallery Carousel */}
+            <div className="relative">
+
+              {/* Thumbnails */}
+              <div className="grid grid-cols-4 gap-4">
+                {galleryImages
+                  .slice(galleryIndex, galleryIndex + 4)
+                  .map((img: string, i: number) => (
+                    <button
+                      key={i}
+                      onClick={() => setActiveImage(img)}
+                      className={`aspect-square rounded-lg overflow-hidden border transition-all ${
+                        activeImage === img
+                          ? "border-brand-500 ring-2 ring-brand-100"
+                          : "border-zinc-200 hover:border-zinc-300"
+                      }`}
+                    >
+                      <img
+                        src={img}
+                        className="w-full h-full object-contain"
+                      />
+                    </button>
+                  ))}
+              </div>
+
+              {/* Prev */}
+              {galleryIndex > 0 && (
                 <button
-                  key={i}
-                  onClick={() => setActiveImage(img)}
-                  className={`aspect-square rounded-lg overflow-hidden border cursor-pointer transition-all ${
-                    activeImage === img
-                      ? 'border-brand-500 ring-2 ring-brand-100'
-                      : 'border-zinc-200 hover:border-zinc-300'
-                  }`}
+                  onClick={prevGallery}
+                  className="absolute -left-4 top-1/2 -translate-y-1/2 bg-white shadow-md border rounded-full w-8 h-8 flex items-center justify-center"
                 >
-                  <img
-                    src={img}
-                    alt={`Gallery ${i + 1}`}
-                    className="w-full h-full object-cover"
-                    onError={(e) => {
-                      e.currentTarget.style.display = 'none';
-                    }}
-                  />
+                  ‹
                 </button>
-              ))}
+              )}
+
+              {/* Next */}
+              {galleryIndex + 4 < galleryImages.length && (
+                <button
+                  onClick={nextGallery}
+                  className="absolute -right-4 top-1/2 -translate-y-1/2 bg-white shadow-md border rounded-full w-8 h-8 flex items-center justify-center"
+                >
+                  ›
+                </button>
+              )}
+
             </div>
           </div>
 
@@ -206,10 +309,10 @@ const TemplateDetailPage: React.FC = () => {
             </div>
 
             <div className="flex items-baseline gap-3 mb-8 pb-8 border-b border-zinc-100">
-              <span className="text-4xl font-bold text-zinc-900">{template.price}</span>
+              <span className="text-4xl font-bold text-zinc-900">{template.price.toLocaleString("vi-VN")}đ</span>
               {template.originalPrice && (
                 <span className="text-xl text-zinc-400 line-through">
-                  {template.originalPrice}
+                  {template.originalPrice.toLocaleString("vi-VN")}đ
                 </span>
               )}
             </div>
@@ -297,15 +400,14 @@ const TemplateDetailPage: React.FC = () => {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {finalRelated.map((item) => (
               <Link
-                key={item.id}
+                key={item.id + item.slug}
                 to={`/templates/${item.slug}`}
                 className="group block"
               >
-                <div className="h-64 rounded-xl overflow-hidden bg-zinc-100 mb-3">
+                <div className="aspect-[16/10] rounded-xl overflow-hidden bg-zinc-100 mb-3 flex items-center justify-center">
                   <img
                     src={item.image}
-                    alt={item.title}
-                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                    className="w-full h-full object-contain transition-transform duration-500 group-hover:scale-105"
                   />
                 </div>
 
@@ -314,7 +416,7 @@ const TemplateDetailPage: React.FC = () => {
                 </h4>
 
                 <div className="text-zinc-500 font-medium">
-                  {item.price}
+                  {item.price.toLocaleString("vi-VN")}đ
                 </div>
               </Link>
             ))}
@@ -323,6 +425,7 @@ const TemplateDetailPage: React.FC = () => {
 
       </Section>
     </div>
+    </>
   );
 };
 

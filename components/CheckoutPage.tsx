@@ -445,7 +445,7 @@ const handlePaymentProcess = async (
                             Đang xử lý...
                           </>
                         ) : (
-                          `Thanh toán $${finalTotal.toFixed(2)}`
+                          `Thanh toán ${finalTotal.toLocaleString("vi-VN")}đ`
                         )}
                     </Button>
                     <div className="flex items-center justify-center gap-2 mt-4 text-xs text-zinc-400">
@@ -472,7 +472,7 @@ const handlePaymentProcess = async (
                                 <div className="text-xs text-zinc-500 mt-1">Số lượng: {item.quantity}</div>
                             </div>
                             <div className="font-mono text-sm font-medium">
-                                ${(item.price * item.quantity).toFixed(2)}
+                                {(item.price * item.quantity).toLocaleString("vi-VN")}đ
                             </div>
                         </div>
                     ))}
@@ -513,12 +513,11 @@ const handlePaymentProcess = async (
                 <div className="border-t border-zinc-100 pt-4 space-y-3 text-sm">
                     <div className="flex justify-between text-zinc-600">
                         <span>Tổng số lượng</span>
-                        <span>{checkoutItems.reduce((acc: number, item: any) => acc + item.quantity, 0)} items</span>
+                        <span>{checkoutItems.reduce((acc: number, item: any) => acc + item.quantity, 0)} sản phẩm</span>
                     </div>
                     <div className="flex justify-between text-zinc-600">
                         <span>Tạm tính</span>
-                        <span>${subtotal.toFixed(2)}</span>
-                    </div>
+                        <span>{subtotal.toLocaleString("vi-VN")}đ</span>                    </div>
                     {appliedCoupon && (
                       <div className="flex justify-between text-green-600">
                         <span>Giảm giá</span>
@@ -527,7 +526,7 @@ const handlePaymentProcess = async (
                     )}
                     <div className="flex justify-between text-xl font-bold text-zinc-900 pt-3 border-t border-zinc-100">
                         <span>Tổng cộng</span>
-                        <span className="text-brand-600">${finalTotal.toFixed(2)}</span>
+                        <span className="text-brand-600">{finalTotal.toLocaleString("vi-VN")}đ</span>
                     </div>
                 </div>
              </div>
