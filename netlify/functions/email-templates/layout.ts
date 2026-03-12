@@ -26,10 +26,17 @@ export const emailLayout = ({ title, content }: { title: string; content: string
               </p>
               
               <ul style="color: #000000; font-size: 14px; line-height: 1.8; padding-left: 20px; margin-bottom: 24px;">
-                <li><strong>Hotline:</strong> [Số điện thoại của bạn]</li>
-                <li><strong>Facebook:</strong> <a href="[Link Fanpage]" style="color: #000000; text-decoration: underline;">[Link Fanpage]</a></li>
-                <li><strong>TikTok:</strong> <a href="[Link kênh TikTok]" style="color: #000000; text-decoration: underline;">[Link kênh TikTok]</a></li>
-                <li><strong>Instagram:</strong> <a href="[Link Instagram]" style="color: #000000; text-decoration: underline;">[Link Instagram]</a></li>
+                <li><strong>Hotline:</strong> 0988971620</li>
+                <li><strong>Facebook:</strong> 
+                  <a href="https://www.facebook.com/optipus.vn" style="color: #000000; text-decoration: underline;">
+                    facebook.com/optipus.vn
+                  </a>
+                </li>
+                <li><strong>TikTok:</strong> 
+                  <a href="https://www.tiktok.com/@optipus.notion" style="color: #000000; text-decoration: underline;">
+                    tiktok.com/@optipus.notion
+                  </a>
+                </li>
               </ul>
               
               <div style="border-top: 1px solid #000000; padding-top: 20px; text-align: center;">

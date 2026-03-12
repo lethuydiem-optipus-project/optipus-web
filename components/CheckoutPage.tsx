@@ -169,8 +169,7 @@ const handlePaymentProcess = async (
     setPaymentCode(order.payment_code);
     console.log("PAYMENT CODE SET:", order.payment_code);
 
-    const qr = `https://img.vietqr.io/image/MB-7109092004-compact2.png?amount=${order.final_amount}&addInfo=${order.payment_code}&accountName=LE%20THUY%20DIEM`;
-
+    const qr = `https://img.vietqr.io/image/MB-09090000009-compact2.png?amount=${order.final_amount}&addInfo=${order.payment_code}&accountName=LE%20THUY%20DIEM`;
     setQrUrl(qr);
     setShowQr(true);
     setPaymentState({ status: 'idle' });
@@ -354,7 +353,7 @@ const handlePaymentProcess = async (
 
           <div className="mt-4 text-xs text-zinc-400 flex items-center gap-2">
             <HelpCircle size={14} /> Nếu cần hỗ trợ, vui
-            lòng liên hệ ProNotion
+            lòng liên hệ OptiPus
           </div>
         </div>
       </Modal>
