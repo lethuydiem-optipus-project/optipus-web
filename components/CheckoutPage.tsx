@@ -6,6 +6,7 @@ import { useAuth } from '../context/AuthContext';
 import { CouponService } from '../services/couponService';
 import { supabase } from "../services/supabase";
 import { useEffect } from "react";
+import { trackEvent } from "../services/analytics";
 
 
 import {
@@ -63,9 +64,9 @@ const CheckoutPage: React.FC = () => {
           ...directItem,
           quantity: 1,
           price:
-            parseFloat(
-              directItem.price.replace(/[^0-9.]/g, '')
-            ) || 0,
+  typeof directItem.price === "string"
+    ? parseFloat(directItem.price.replace(/[^0-9.]/g, "")) || 0
+    : directItem.price,
         },
       ]
     : cartItems.filter(item => item.selected);
@@ -77,6 +78,19 @@ const CheckoutPage: React.FC = () => {
   );
 
   const finalTotal = Math.max(0, subtotal - discount);
+
+  useEffect(() => {
+  trackEvent("begin_checkout", {
+    value: finalTotal,
+    currency: "VND",
+    items: checkoutItems.map((item:any) => ({
+      item_name: item.title,
+      price: item.price,
+      quantity: item.quantity
+    }))
+  });
+}, []);
+
   useEffect(() => {
     if (!paymentCode || !showQr) return;
 
@@ -100,6 +114,16 @@ const CheckoutPage: React.FC = () => {
 
       if (data?.status === "paid") {
         clearInterval(interval);
+        trackEvent("purchase", {
+          transaction_id: paymentCode,
+          value: finalTotal,
+          currency: "VND",
+          items: checkoutItems.map((item:any) => ({
+            item_name: item.title,
+            price: item.price,
+            quantity: item.quantity
+          }))
+        });
         console.log("Payment detected!");
 
         setShowQr(false);

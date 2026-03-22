@@ -10,6 +10,7 @@ import { useLoginGuard } from '../hooks/useLoginGuard';
 
 import { ProductService } from '../services/productService';
 import { adaptProductToTemplate } from '../adapters/productAdapter';
+import { trackEvent } from '../services/analytics';
 
 const TemplateDetailPage: React.FC = () => {
   const { slug } = useParams<{ slug: string }>();
@@ -40,6 +41,13 @@ const TemplateDetailPage: React.FC = () => {
 
         // set ảnh chính
         setActiveImage(adapted.image);
+        // TRACK VIEW TEMPLATE (GA4)
+        trackEvent("view_template", {
+          template_name: adapted.title,
+          template_slug: adapted.slug,
+          price: adapted.price
+        });
+
       } else {
         setTemplate(null);
       }
@@ -93,6 +101,11 @@ const TemplateDetailPage: React.FC = () => {
   };
 
   const handleBuyNow = () => {
+  trackEvent("buy_now_click", {
+    template_name: template.title,
+    template_slug: template.slug,
+    price: template.price
+  });
     requireAuth(
       () => {
         navigate('/checkout', { state: { directPurchase: template } });
