@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Template Notion Quản Lý Cuộc Sống & Công Việc | OptiPus</title>
+    <meta name="description" content="Khám phá các template Notion giúp quản lý công việc, lập kế hoạch và tăng năng suất. Phù hợp cho sinh viên, creator và marketer." />
+    <link rel="icon" href="/logo_icon_black.png" media="(prefers-color-scheme: light)">
+    <link rel="icon" href="/logo_icon_white.png" media="(prefers-color-scheme: dark)">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Oswald:wght@400;500;700&display=swap" rel="stylesheet">
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            fontFamily: {
+              sans: ['Inter', 'sans-serif'],
+              display: ['Oswald', 'sans-serif'],
+            },
+            colors: {
+              brand: {
+                50: '#faf5ff',
+                100: '#f3e8ff',
+                200: '#e9d5ff',
+                300: '#d8b4fe',
+                400: '#c084fc',
+                500: '#a855f7', // Deep Purple
+                600: '#9333ea',
+                700: '#7e22ce',
+                800: '#6b21a8',
+                900: '#581c87',
+              },
+              accent: {
+                50: '#f0fdfa',
+                100: '#ccfbf1',
+                200: '#99f6e4',
+                300: '#5eead4',
+                400: '#2dd4bf', // Teal
+                500: '#14b8a6',
+                600: '#0d9488',
+                700: '#0f766e',
+              }
+            },
+          }
+        }
+      }
+    </script>
+    <style>
+      body {
+        background-color: #ffffff;
+        color: #18181b;
+      }
+      .text-glow {
+        text-shadow: 0 0 20px rgba(168, 85, 247, 0.3);
+      }
+      .perspective-container {
+        perspective: 1000px;
+      }
+      .rotate-3d {
+        transform: rotateX(10deg) rotateY(-5deg) rotateZ(2deg);
+        box-shadow: 0 20px 50px rgba(0,0,0,0.1);
+      }
+      @keyframes float {
+        0%, 100% { transform: rotateX(10deg) rotateY(-5deg) rotateZ(2deg) translateY(0px); }
+        50% { transform: rotateX(10deg) rotateY(-5deg) rotateZ(2deg) translateY(-20px); }
+      }
+      .animate-float {
+        animation: float 6s ease-in-out infinite;
+      }
+    </style>
+  <script type="importmap">
+{
+  "imports": {
+    "react": "https://esm.sh/react@^19.2.3",
+    "react-dom/": "https://esm.sh/react-dom@^19.2.3/",
+    "react/": "https://esm.sh/react@^19.2.3/",
+    "lucide-react": "https://esm.sh/lucide-react@^0.563.0",
+    "react-router-dom": "https://esm.sh/react-router-dom@^7.13.0",
+    "react-dom": "https://esm.sh/react-dom@^19.2.3"
+  }
+}
+</script>
+
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-95183H7GGK"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-95183H7GGK');
+</script>
+
+</head>
+  <body>
+    <div id="root"></div>
+  <script type="module" src="/index.tsx"></script>
+</body>
+</html>
