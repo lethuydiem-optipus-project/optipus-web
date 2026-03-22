@@ -118,7 +118,9 @@ const CheckoutPage: React.FC = () => {
           transaction_id: paymentCode,
           value: finalTotal,
           currency: "VND",
+          template_name: checkoutItems.map(i => i.title).join(", "),
           items: checkoutItems.map((item:any) => ({
+            item_id: item.slug,
             item_name: item.title,
             price: item.price,
             quantity: item.quantity

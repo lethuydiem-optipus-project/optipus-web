@@ -86,6 +86,11 @@ const TemplateDetailPage: React.FC = () => {
   const handleAddToCart = (e: React.MouseEvent) => {
     e.preventDefault();
     e.stopPropagation();
+    trackEvent("add_to_cart", {
+      template_name: template.title,
+      template_slug: template.slug,
+      price: template.price
+    });
 
     requireAuth(
       () => {

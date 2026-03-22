@@ -10,6 +10,7 @@ import { useLoginGuard } from "../hooks/useLoginGuard";
 
 import { ProductService } from "../services/productService";
 import { adaptProductToTemplate } from "../adapters/productAdapter";
+import { trackEvent } from '../services/analytics';
 
 const Pricing: React.FC = () => {
   const [templates, setTemplates] = useState<any[]>([]);
@@ -39,7 +40,11 @@ const Pricing: React.FC = () => {
   const handleAddToCart = (e: React.MouseEvent, template: any) => {
     e.preventDefault();
     e.stopPropagation();
-
+    trackEvent("add_to_cart", {
+      template_name: template.title,
+      template_slug: template.slug,
+      price: template.price
+    });
     requireAuth(
       () => {
         addToCart(template);
