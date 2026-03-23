@@ -30,8 +30,8 @@ type UITemplate = {
   category: string;
   description: string;
   features: string[];
-  price: string;
-  originalPrice: string | null;
+  price: number;
+  originalPrice: number | null;
   rating: number;
   bestseller: boolean;
   shortDescription?: string;
@@ -66,10 +66,8 @@ export function adaptProductToTemplate(p: any): UITemplate {
 
     features: p.features ?? extractFeatures(p.description),
 
-    price: formatPrice(p.price),
-    originalPrice: p.original_price
-      ? formatPrice(p.original_price)
-      : null,
+    price: p.price,
+    originalPrice: p.original_price ?? null,
 
     rating: p.rating ?? 4.8,
     bestseller: (p.rating ?? 0) >= 4.9,
