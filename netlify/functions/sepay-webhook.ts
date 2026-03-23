@@ -45,8 +45,8 @@ export const handler: Handler = async (event) => {
       return { statusCode: 200, body: "Already fully processed" };
     }
 
-    // 🔥 4. Check amount match
-    if (Number(order.final_amount) !== Number(transferAmount)) {
+    // 🔥 4. Check amount match (bỏ qua nếu đơn free)
+    if (order.final_amount > 0 && Number(order.final_amount) !== Number(transferAmount)) {
       console.log("ERROR: Amount mismatch", order.final_amount, transferAmount);
       return { statusCode: 400, body: "Amount mismatch" };
     }
@@ -73,7 +73,7 @@ export const handler: Handler = async (event) => {
         .from("orders")
         .update({
           status: "paid",
-          sepay_txn_id: referenceCode,
+          sepay_txn_id: referenceCode || null,
           paid_at: new Date().toISOString(),
         })
         .eq("id", order.id);

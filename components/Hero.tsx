@@ -26,7 +26,7 @@ const Hero: React.FC = () => {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
           {/* Content (Left) */}
           <div className="flex flex-col justify-center order-2 lg:order-1">
-            <h1 className="text-6xl md:text-8xl lg:text-9xl font-display font-bold text-zinc-900 leading-[0.85] tracking-tighter uppercase mb-8">
+            <h1 className="text-6xl md:text-8xl lg:text-9xl font-display font-bold text-zinc-900 leading-[1.05] tracking-tighter uppercase mb-8">
               <span className="text-transparent bg-clip-text bg-gradient-to-b from-zinc-900 via-zinc-800 to-zinc-500">OptiPus</span><br />
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-600 via-brand-500 to-accent-400">Giải pháp quản trị</span><br />
               <span className="text-zinc-900 drop-shadow-xl">Thông Minh</span>

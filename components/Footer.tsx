@@ -1,6 +1,6 @@
 
 import React, { useState } from 'react';
-import { ArrowRight, Twitter, Linkedin, Facebook, Instagram, Zap } from 'lucide-react';
+import { ArrowRight, Facebook, Instagram,Music2, Zap } from 'lucide-react';
 import { Button } from './ui/Button';
 import { SuccessModal } from './ui/SuccessModal';
 import { Link } from 'react-router-dom';
@@ -92,13 +92,33 @@ const Footer: React.FC = () => {
                     <p className="text-xs text-zinc-400 mt-3 font-medium">Cập nhật sản phẩm & mẹo hay hàng tuần.</p>
                  </div>
 
-                 <div className="flex gap-3">
-                    {[Facebook, Instagram, Twitter, Linkedin].map((Icon, i) => (
-                      <a key={i} href="#" className="p-2.5 rounded-full bg-zinc-50 border border-zinc-100 text-zinc-400 hover:bg-brand-50 hover:text-brand-600 hover:border-brand-200 transition-all">
-                        <Icon size={18} />
-                      </a>
-                    ))}
-                 </div>
+<div className="flex gap-3">
+
+  <a
+    href="https://www.facebook.com/optipus.vn"
+    target="_blank"
+    className="p-2.5 rounded-full bg-zinc-50 border border-zinc-100 text-zinc-400 hover:bg-brand-50 hover:text-brand-600 hover:border-brand-200 transition-all"
+  >
+    <Facebook size={18} />
+  </a>
+
+  <a
+    href="https://www.instagram.com/optipus_tp_notion"
+    target="_blank"
+    className="p-2.5 rounded-full bg-zinc-50 border border-zinc-100 text-zinc-400 hover:bg-brand-50 hover:text-brand-600 hover:border-brand-200 transition-all"
+  >
+    <Instagram size={18} />
+  </a>
+
+  <a
+    href="https://www.tiktok.com/@optipus.notion"
+    target="_blank"
+    className="p-2.5 rounded-full bg-zinc-50 border border-zinc-100 text-zinc-400 hover:bg-brand-50 hover:text-brand-600 hover:border-brand-200 transition-all"
+  >
+    <Music2 size={18} />
+  </a>
+
+</div>
                </div>
 
                {/* Spacer */}
@@ -119,7 +139,7 @@ const Footer: React.FC = () => {
                       <li><a href="#" className="hover:text-brand-600 transition-colors">Về Optipus</a></li>
                       <li><a href="#" className="hover:text-brand-600 transition-colors">Đánh giá</a></li>
                       <li><Link to="/contact" className="hover:text-brand-600 transition-colors">Liên Hệ</Link></li>
-                      <li><Link to="#" className="hover:text-brand-600 transition-colors">Site map</Link></li>
+                      <li><a  href="/sitemap.xml"  target="_blank"  className="hover:text-brand-600 transition-colors">  Site map</a></li>
                     </ul>
                   </div>
                   <div>
@@ -136,7 +156,7 @@ const Footer: React.FC = () => {
              {/* Bottom Bar */}
              <div className="pt-8 border-t border-zinc-100 flex flex-col md:flex-row justify-between items-center gap-4 text-xs text-zinc-400 font-medium">
                <div className="flex flex-col md:flex-row items-center gap-4 md:gap-8">
-                 <span>© 2025 ProNotion Inc.</span>
+                 <span>© 2026 Optipus</span>
                  <div className="flex items-center gap-2 px-3 py-1 rounded-full bg-green-50 border border-green-100 text-green-700">
                     <span className="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse"></span>
                     <span>All systems operational</span>

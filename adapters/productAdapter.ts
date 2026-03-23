@@ -35,6 +35,7 @@ type UITemplate = {
   rating: number;
   bestseller: boolean;
   shortDescription?: string;
+  additionalInfo?: any;
 };
 
 
@@ -53,19 +54,27 @@ const TAG_LABEL_MAP: Record<string, string> = {
  */
 export function adaptProductToTemplate(p: any): UITemplate {
   return {
-    id: p.id,              // ✅ UUID thật
-    slug: p.slug,          // ✅ slug thật
+    id: p.id,
+    slug: p.slug,
     title: p.title,
     image: p.cover_image,
     gallery: p.gallery ?? [],
     category: TAG_LABEL_MAP[p.tag ?? ''] || 'Other',
+
     description: p.description || '',
     shortDescription: p.short_description || '',
-    features: extractFeatures(p.description),
-    price: p.price,
-    originalPrice: p.original_price ?? null,
+
+    features: p.features ?? extractFeatures(p.description),
+
+    price: formatPrice(p.price),
+    originalPrice: p.original_price
+      ? formatPrice(p.original_price)
+      : null,
+
     rating: p.rating ?? 4.8,
     bestseller: (p.rating ?? 0) >= 4.9,
+
+    additionalInfo: p.additional_info ?? null,
   };
 }
 

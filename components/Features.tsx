@@ -34,15 +34,15 @@ const Features: React.FC = () => {
     <Section id="features">
       <div className="mb-16 max-w-2xl">
         <h2 className="text-5xl md:text-7xl font-display font-bold text-zinc-900 uppercase tracking-tighter mb-6">
-          OPTIMIZED <br />
-          <span className="text-zinc-400">SYSTEMS</span>
+          QUẢN TRỊ <br />
+          <span className="text-zinc-400">TỐI ƯU</span>
         </h2>
         <p className="text-lg text-zinc-600">
           Triển khai các hệ thống quản trị thông minh giúp tự động hóa lộ trình học tập và làm việc. Optipus xóa bỏ khoảng cách giữa những ghi chú rời rạc và kết quả thực tế.
         </p>
         <div className="mt-8">
            <Link to="/templates">
-             <Button variant="outline">Learn More</Button>
+             <Button variant="outline">Xem thêm</Button>
            </Link>
         </div>
       </div>

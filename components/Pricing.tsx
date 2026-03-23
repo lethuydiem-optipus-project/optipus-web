@@ -160,7 +160,7 @@ const Pricing: React.FC = () => {
                     className="flex items-center justify-center gap-2"
                     onClick={(e) => handleAddToCart(e, template)}
                   >
-                    <ShoppingCart size={16} /> Add to Cart
+                    <ShoppingCart size={16} /> Thêm giỏ hàng
                   </Button>
 
                   <Link to={`/templates/${template.slug}`}>
@@ -169,7 +169,7 @@ const Pricing: React.FC = () => {
                       size="sm"
                       className="w-full bg-zinc-50 border-zinc-200 hover:border-brand-200 hover:text-brand-600"
                     >
-                      View Details
+                      Xem chi tiết
                     </Button>
                   </Link>
                 </div>

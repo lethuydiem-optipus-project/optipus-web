@@ -336,12 +336,12 @@ const TemplateDetailPage: React.FC = () => {
             </div>
 
             <p className="text-lg text-zinc-600 mb-8">
-              {template.description}
+              {template.shortDescription}
             </p>
 
             <div className="flex flex-col sm:flex-row gap-4 mb-8">
               <Button size="lg" className="flex-1" onClick={handleAddToCart}>
-                <ShoppingCart size={20} className="mr-2" /> Add to Cart
+                <ShoppingCart size={20} className="mr-2" /> Thêm Giỏ Hàng
               </Button>
               <Button
                 variant="secondary"
@@ -349,19 +349,19 @@ const TemplateDetailPage: React.FC = () => {
                 className="flex-1 border-brand-200 hover:bg-brand-50 text-brand-700"
                 onClick={handleBuyNow}
               >
-                Buy Now
+                Mua Ngay
               </Button>
             </div>
 
             <div className="bg-zinc-50 rounded-xl p-5 space-y-3 border border-zinc-100">
               <div className="flex items-center gap-3 text-sm text-zinc-600">
-                <Check size={18} className="text-green-500" /> Instant Download
+                <Check size={18} className="text-green-500" /> Download tức thì
               </div>
               <div className="flex items-center gap-3 text-sm text-zinc-600">
-                <Check size={18} className="text-green-500" /> Lifetime Updates
+                <Check size={18} className="text-green-500" /> Free version mới nhất
               </div>
               <div className="flex items-center gap-3 text-sm text-zinc-600">
-                <ShieldCheck size={18} className="text-brand-500" /> 30-Day Money Back Guarantee
+                <ShieldCheck size={18} className="text-brand-500" /> Chính sách hoàn tiền minh bạch
               </div>
             </div>
           </div>
@@ -378,7 +378,7 @@ const TemplateDetailPage: React.FC = () => {
                   : 'text-zinc-400'
               }`}
             >
-              Description
+              Mô tả
             </button>
             <button
               onClick={() => setActiveTab('additional')}
@@ -388,7 +388,7 @@ const TemplateDetailPage: React.FC = () => {
                   : 'text-zinc-400'
               }`}
             >
-              Additional Information
+              Thông tin khác
             </button>
           </div>
 
@@ -413,7 +413,7 @@ const TemplateDetailPage: React.FC = () => {
 
         {/* Related */}
         <div>
-          <h3 className="text-2xl font-bold mb-8">You May Also Like</h3>
+          <h3 className="text-2xl font-bold mb-8">Bạn có thể thích</h3>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {finalRelated.map((item) => (

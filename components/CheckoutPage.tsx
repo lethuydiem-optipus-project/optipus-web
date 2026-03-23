@@ -188,12 +188,54 @@ const handlePaymentProcess = async (
   setPaymentState({ status: 'pending' });
 
   try {
-    const result = await placeOrder(appliedCoupon || undefined, formData.email);
+const result = await placeOrder(
+  checkoutItems,
+  appliedCoupon || undefined,
+  formData.email
+);
 
-    // result phải trả về order (nếu chưa thì báo mình)
-    const order = result;
+const order = result;
+
+// ✅ đơn hàng free
+if (order.final_amount === 0) {
+  await fetch("/.netlify/functions/sepay-webhook", {
+  method: "POST",
+  body: JSON.stringify({
+    content: order.payment_code,
+    transferAmount: 0,
+    referenceCode: "FREE_ORDER"
+  })
+});
+
+  await supabase
+    .from("orders")
+    .update({
+      status: "paid",
+      paid_at: new Date()
+    })
+    .eq("id", order.id);
+
+  // 🔥 GỌI FUNCTION GỬI EMAIL
+  await fetch("/.netlify/functions/send-email", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({
+      order_id: order.id
+    })
+  });
+
+  setPaymentState({
+    status: "success",
+    transactionId: order.payment_code,
+  });
+
+  return;
+}
+
+// 🔽 flow cũ
     setPaymentCode(order.payment_code);
-    console.log("PAYMENT CODE SET:", order.payment_code);
 
     const qr = `https://img.vietqr.io/image/MB-09090000009-compact2.png?amount=${order.final_amount}&addInfo=${order.payment_code}&accountName=LE%20THUY%20DIEM`;
     setQrUrl(qr);

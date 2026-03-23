@@ -86,10 +86,10 @@ const TemplatesPage: React.FC = () => {
         <div className="flex flex-col md:flex-row md:items-end justify-between gap- mb-12">
           <div className="max-w-2xl">
             <h1 className="text-4xl md:text-5xl font-display font-bold text-zinc-900 mb-4 tracking-tight">
-              Latest Templates
+               Templates mới nhất
             </h1>
             <p className="text-lg text-zinc-500">
-              Premium systems to accelerate your workflow. Duplicatable to your workspace in seconds.
+              Tối ưu quy trình với hệ thống quản trị thông minh. Nhân bản vào Workspace của bạn chỉ trong tích tắc.
             </p>
           </div>
         </div>
@@ -185,7 +185,7 @@ const TemplatesPage: React.FC = () => {
                       className="w-full flex items-center justify-center gap-2"
                       onClick={(e) => handleAddToCart(e, template)}
                     >
-                      <ShoppingCart size={16} /> Add to Cart
+                      <ShoppingCart size={16} /> Thêm giỏ hàng
                     </Button>
                     <Link to={`/templates/${template.slug}`} className="w-full">
                       <Button
@@ -193,7 +193,7 @@ const TemplatesPage: React.FC = () => {
                         size="sm"
                         className="w-full flex items-center justify-center gap-2 bg-zinc-50 border-zinc-200 hover:border-brand-200 hover:text-brand-600"
                       >
-                        View Details
+                        Xem chi tiết
                       </Button>
                     </Link>
                   </div>
