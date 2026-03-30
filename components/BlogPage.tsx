@@ -6,7 +6,14 @@ import { ArrowRight, Clock, Calendar, Loader2 } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { BlogService, BlogPost } from '../data/blogPosts';
 
-const categories = ['All', 'Productivity', 'Templates', 'Business', 'Tutorials', 'Updates'];
+const categories = [
+  'All',
+  'Foundation',
+  'Tutorials',
+  'Comparison',
+  'Templates',
+  'Brand Story'
+];
 
 const BlogPage: React.FC = () => {
   const [activeCategory, setActiveCategory] = useState('All');
@@ -42,7 +49,7 @@ const BlogPage: React.FC = () => {
             Insights & <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-600 to-accent-500">Updates</span>
           </h1>
           <p className="text-lg md:text-xl text-zinc-500 leading-relaxed">
-            Deep dives into productivity systems, template guides, and the future of work.
+            Các bài viết chuyên sâu về hệ thống quản lý năng suất, hướng dẫn sử dụng template và xu hướng quản lý công việc trong tương lai
           </p>
         </div>
 
@@ -128,7 +135,7 @@ const BlogPage: React.FC = () => {
                     </div>
                     
                     <Link to={`/blog/${post.slug}`} className="text-sm font-bold text-brand-600 flex items-center gap-1 group/link cursor-pointer">
-                      Read Post <ArrowRight className="w-4 h-4 transition-transform group-hover/link:translate-x-1" />
+                      Đọc Thêm <ArrowRight className="w-4 h-4 transition-transform group-hover/link:translate-x-1" />
                     </Link>
                   </div>
                 </div>

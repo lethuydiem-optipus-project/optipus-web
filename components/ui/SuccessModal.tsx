@@ -18,7 +18,7 @@ export const SuccessModal: React.FC<SuccessModalProps> = ({
   onClose,
   title = "Thông tin của bạn đã được ghi nhận",
   message = "Cảm ơn bạn đã gửi thông tin. Chúng tôi sẽ phản hồi bạn trong thời gian sớm nhất.",
-  brandNote = "— ProNotion",
+  brandNote = "— OptiPus",
   buttonText = "Đóng"
 }) => {
   return (
