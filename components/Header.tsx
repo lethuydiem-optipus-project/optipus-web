@@ -121,7 +121,7 @@ const Header: React.FC = () => {
           {/* Logo */}
           <Link to="/" className="flex items-center gap-2 z-20">
               <img
-                src="/logo_large.png"
+                src="/logo_large.webp"
                 alt="Optipus"
                 className="h-14 object-contain"
               />
