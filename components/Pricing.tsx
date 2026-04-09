@@ -91,11 +91,15 @@ const Pricing: React.FC = () => {
               to={`/templates/${template.slug}`}
               className="relative aspect-square overflow-hidden rounded-t-2xl block"
             >
-              <img
-                src={template.image}
-                alt={template.title}
-                className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-110"
-              />
+            <img
+              src={template.image}
+              alt={template.title}
+              loading="lazy"
+              decoding="async"
+              width={400}
+              height={400}
+              className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-110"
+            />
 
               <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent opacity-60"></div>
 
