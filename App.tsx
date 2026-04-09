@@ -1,13 +1,14 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, Suspense, lazy } from 'react';
 import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom';
-
+import NotFoundPage from './components/NotFoundPage';
 import Header from './components/Header';
 import Hero from './components/Hero';
-import Features from './components/Features';
-import HowItWorks from './components/HowItWorks';
-import Testimonials from './components/Testimonials';
-import Pricing from './components/Pricing';
 import Footer from './components/Footer';
+
+const Features = lazy(() => import('./components/Features'));
+const HowItWorks = lazy(() => import('./components/HowItWorks'));
+const Testimonials = lazy(() => import('./components/Testimonials'));
+const Pricing = lazy(() => import('./components/Pricing'));
 
 import TemplatesPage from './components/TemplatesPage';
 import BlogPage from './components/BlogPage';
@@ -44,10 +45,17 @@ const ScrollToTop = () => {
 const HomePage: React.FC = () => (
   <>
     <Hero />
-    <Features />
-    <Pricing />
-    <HowItWorks />
-    <Testimonials />
+
+      <Suspense fallback={
+        <div className="h-[300px] flex items-center justify-center text-zinc-400">
+          Loading...
+        </div>
+      }>
+      <Features />
+      <Pricing />
+      <HowItWorks />
+      <Testimonials />
+    </Suspense>
   </>
 );
 
@@ -90,6 +98,8 @@ const App: React.FC = () => {
                     <Route element={<ProtectedRoute requiredRole="admin" />}>
                       <Route path="/admin" element={<AdminDashboard />} />
                     </Route>
+                    <Route path="*" element={<NotFoundPage />} />
+
                   </Routes>
                 </main>
 

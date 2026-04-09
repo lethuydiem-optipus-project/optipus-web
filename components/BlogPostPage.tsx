@@ -4,6 +4,7 @@ import { useParams, Link, useNavigate } from 'react-router-dom';
 import { Section } from './ui/Section';
 import { BlogService, BlogPost } from '../data/blogPosts';
 import { ArrowLeft, Calendar, Clock, User, Facebook, Twitter, Linkedin, Loader2, Instagram } from 'lucide-react';
+import { Helmet } from 'react-helmet-async';
 
 const BlogPostPage: React.FC = () => {
   const { slug } = useParams<{ slug: string }>();
@@ -48,7 +49,25 @@ const BlogPostPage: React.FC = () => {
 
   if (!post) return null;
 
-  return (
+return (
+  <>
+    <Helmet>
+      <title>{post.title}</title>
+      <meta
+        name="description"
+        content={post.excerpt}
+      />
+      <meta name="author" content={post.author} />
+      <meta
+        name="keywords"
+        content={`${post.title}, template notion, notion, optipus`}
+      />
+      <meta name="robots" content="index,follow" />
+        {/* thêm dòng này */}
+      <meta name="publisher" content="OptiPus" />
+      <link rel="canonical" href={`https://optipus.vn/blog/${slug}`} />
+    </Helmet>
+
     <article className="pt-24 pb-20 min-h-screen bg-white">
       {/* Hero Header */}
       <div className="bg-zinc-50 border-b border-zinc-100 pb-16 pt-10">
@@ -96,9 +115,7 @@ const BlogPostPage: React.FC = () => {
       {/* Content Body */}
       <Section className="!py-0">
         <div className="max-w-5xl mx-auto px-6">
-          
-          {/* Main Content - Rendering Raw HTML */}
-          <div >
+          <div>
             <div
               className="prose prose-zinc max-w-none
               prose-headings:font-display prose-headings:font-bold prose-headings:text-zinc-900
@@ -143,27 +160,27 @@ const BlogPostPage: React.FC = () => {
               dangerouslySetInnerHTML={{ __html: post.content }}
             />
 
-             {/* Share / Tags Footer */}
-             <div className="mt-16 pt-8 border-t border-zinc-100 flex flex-col sm:flex-row justify-between items-center gap-6">
-                <p className="text-zinc-400 text-sm font-medium">Chia sẻ bài viết:</p>
-                <div className="flex gap-2">
-                   <button className="p-2 rounded-full border border-zinc-200 text-zinc-500 hover:text-brand-600 hover:border-brand-200 transition-colors">
-                      <Instagram size={18} />
-                   </button>
-                   <button className="p-2 rounded-full border border-zinc-200 text-zinc-500 hover:text-blue-600 hover:border-blue-200 transition-colors">
-                      <Facebook size={18} />
-                   </button>
-                   <button className="p-2 rounded-full border border-zinc-200 text-zinc-500 hover:text-blue-700 hover:border-blue-200 transition-colors">
-                      <Linkedin size={18} />
-                   </button>
-                </div>
-             </div>
+            <div className="mt-16 pt-8 border-t border-zinc-100 flex flex-col sm:flex-row justify-between items-center gap-6">
+              <p className="text-zinc-400 text-sm font-medium">Chia sẻ bài viết:</p>
+              <div className="flex gap-2">
+                <button className="p-2 rounded-full border border-zinc-200 text-zinc-500 hover:text-brand-600 hover:border-brand-200 transition-colors">
+                  <Instagram size={18} />
+                </button>
+                <button className="p-2 rounded-full border border-zinc-200 text-zinc-500 hover:text-blue-600 hover:border-blue-200 transition-colors">
+                  <Facebook size={18} />
+                </button>
+                <button className="p-2 rounded-full border border-zinc-200 text-zinc-500 hover:text-blue-700 hover:border-blue-200 transition-colors">
+                  <Linkedin size={18} />
+                </button>
+              </div>
+            </div>
           </div>
-
         </div>
       </Section>
     </article>
-  );
+  </>
+);
+
 };
 
 export default BlogPostPage;

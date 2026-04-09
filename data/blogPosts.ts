@@ -137,7 +137,7 @@ export const blogPosts: BlogPost[] = [
   {
     id: '3',
     slug: 'so-sanh-notion-vs-google-sheet',
-    title: 'Notion vs Google Sheet: Đâu là công cụ quản lý công việc tốt nhất 2026?',
+    title: 'Notion vs Google Sheet: Đâu là công cụ quản lý tốt nhất 2026?',
     excerpt: 'Tìm hiểu lý do tại sao Notion vượt trội hơn Google Sheets trong việc quản lý công việc và dự án. So sánh tính năng, linh hoạt và cách Notion giúp bạn làm việc hiệu quả hơn.',
     category: 'Comparison',
     author: 'Lê Thúy Diễm',
@@ -202,7 +202,7 @@ export const blogPosts: BlogPost[] = [
     title: 'Câu chuyện thương hiệu: Giải mã cái tên Optipus',
     excerpt: 'Khám phá triết lý đằng sau cái tên Optipus, lý do bạch tuộc là hình mẫu tối ưu hóa công việc và quản lý đa nhiệm hiệu quả.',
     category: 'Brand Story',
-    author: 'Lê Thúy Diễm',
+    author: 'Đặng Mạnh Hảo',
     date: 'Mar 23, 2026',
     readTime: '3 min read',
     image: '/blog/optipus-brand-story.svg',

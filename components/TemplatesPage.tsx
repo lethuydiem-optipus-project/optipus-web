@@ -59,7 +59,7 @@ const TemplatesPage: React.FC = () => {
   return (
     <>
       <Helmet>
-        <title>Template Notion Tăng Năng Suất | OptiPus</title>
+        <title>Kho Template Notion Quản Lý Công Việc & Học Tập | OptiPus</title>
 
         <meta
           name="description"
@@ -68,7 +68,7 @@ const TemplatesPage: React.FC = () => {
 
         <meta
           property="og:title"
-          content="Template Notion Tăng Năng Suất | OptiPus"
+          content="Kho Template Notion Quản Lý Công Việc & Học Tập | OptiPus"
         />
 
         <meta
