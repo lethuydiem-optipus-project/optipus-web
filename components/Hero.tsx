@@ -50,7 +50,7 @@ const Hero: React.FC = () => {
           </div>
 
           {/* Dashboard Preview */}
-          <div className="relative w-full order-1 lg:order-2 mb-8 lg:mb-0">
+            <div className="hidden md:block relative w-full order-1 lg:order-2 mb-8 lg:mb-0">
             <div className="relative z-10 border border-zinc-200 rounded-xl bg-white/95 overflow-hidden shadow-xl md:shadow-2xl">
               {/* Header */}
               <div className="h-10 border-b border-zinc-100 bg-zinc-50/70 flex items-center px-4 justify-between">
